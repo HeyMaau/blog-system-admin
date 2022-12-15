@@ -51,8 +51,19 @@ export default {
     getCaptcha() {
       this.$refs.captchaImgRef.src = "http://localhost:8080/user/captcha?captcha_key=" + this.captchaKey
     },
-    doLogin() {
-      login(this.captchaKey, this.loginForm)
+    async doLogin() {
+      try {
+        const {data: response} = await login(this.captchaKey, this.loginForm)
+        if (response.code === 20000) {
+          this.$message.success("登录成功")
+          this.$router.push('/')
+        } else {
+          this.$message.error(response.message)
+        }
+      } catch (e) {
+        this.$message.error("系统繁忙，请稍后再试")
+      }
+
     }
   },
   mounted() {

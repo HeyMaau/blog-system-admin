@@ -1,4 +1,3 @@
-import Vue from "vue";
 import axios from "axios";
 
 const request = axios.create({
@@ -10,12 +9,5 @@ const request = axios.create({
 export function login(key, user) {
     const captcha = user.captcha
     delete user.captcha
-    console.log(user)
-    request.post(`login/${key}/${captcha}`, user).then(value => {
-        console.log(value)
-        return value
-    }).catch(reason => {
-        console.log(reason)
-        Vue.prototype.$message.error("网络错误")
-    })
+    return request.post(`login/${key}/${captcha}`, user)
 }
