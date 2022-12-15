@@ -16,7 +16,7 @@
           <img ref="captchaImgRef" style="height:30px; width: 100px; margin-bottom: 22px"/>
         </div>
       </el-form>
-      <el-button type="primary" class="login-button" @click="doLogin()">登录</el-button>
+      <el-button type="primary" class="login-button" @click="doLogin">登录</el-button>
     </el-card>
   </div>
 </template>

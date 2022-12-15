@@ -4,6 +4,7 @@ import Vue from "vue";
 //引入组件
 import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
+import UserList from "@/components/UserList";
 
 import {getCookie} from "@/utils/cookie-util";
 
@@ -15,7 +16,11 @@ Vue.use(VueRouter)
 // 每个路由都需要映射到一个组件。
 // 我们后面再讨论嵌套路由。
 const routes = [
-    {path: '/', component: MainPage},
+    {
+        path: '/', component: MainPage, children: [
+            {path: 'user', component: UserList}
+        ]
+    },
     {path: '/login', component: LoginPage}
 ]
 
