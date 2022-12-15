@@ -5,6 +5,10 @@ import Vue from "vue";
 import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
 
+import {getCookie} from "@/utils/cookie-util";
+
+import * as Constants from "@/utils/constants"
+
 Vue.use(VueRouter)
 
 // 2. 定义一些路由
@@ -21,6 +25,18 @@ const routes = [
 const router = new VueRouter({
     // 4. 内部提供了 history 模式的实现。为了简单起见，我们在这里使用 hash 模式。
     routes// `routes: routes` 的缩写
+})
+
+router.beforeEach((to, from, next) => {
+    if (to.path !== "/login") {
+        let cookie = getCookie(Constants.KEY_COOKIE_TOKEN);
+        if (cookie == null || cookie.length === 0) {
+            next('/login')
+        } else {
+            next()
+        }
+    }
+    next()
 })
 
 export default router
