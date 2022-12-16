@@ -16,7 +16,10 @@ import {
     MenuItem,
     MenuItemGroup,
     Breadcrumb,
-    BreadcrumbItem
+    BreadcrumbItem,
+    Table,
+    TableColumn,
+    Pagination
 } from 'element-ui';
 
 Vue.component(Container.name, Container);
@@ -35,4 +38,7 @@ Vue.component(MenuItem.name, MenuItem);
 Vue.component(MenuItemGroup.name, MenuItemGroup);
 Vue.component(Breadcrumb.name, Breadcrumb);
 Vue.component(BreadcrumbItem.name, BreadcrumbItem);
+Vue.component(Table.name, Table);
+Vue.component(TableColumn.name, TableColumn);
+Vue.component(Pagination.name, Pagination);
 Vue.prototype.$message = Message

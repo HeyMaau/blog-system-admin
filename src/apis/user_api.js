@@ -11,3 +11,12 @@ export function login(key, user) {
     delete user.captcha
     return request.post(`login/${key}/${captcha}`, user)
 }
+
+export function getUsers(page, size) {
+    return request.get('list', {
+        params: {
+            page: page,
+            size: size
+        }
+    })
+}
