@@ -20,3 +20,7 @@ export function getUsers(page, size) {
         }
     })
 }
+
+export function deleteUser(userID) {
+    return request.delete(`${userID}`)
+}

@@ -37,8 +37,6 @@ router.beforeEach((to, from, next) => {
         let cookie = getCookie(Constants.KEY_COOKIE_TOKEN);
         if (cookie == null || cookie.length === 0) {
             next('/login')
-        } else {
-            next()
         }
     }
     next()

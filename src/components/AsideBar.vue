@@ -1,18 +1,17 @@
 <template>
   <div>
     <el-menu
-        default-active="1"
-        @open="handleOpen"
-        @close="handleClose"
+        :default-active="$route.path"
+        router
         @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
-      <el-menu-item index="1">
+      <el-menu-item index="/">
         <i class="el-icon-menu"></i>
         <span slot="title">首页</span>
       </el-menu-item>
-      <el-menu-item index="2">
+      <el-menu-item index="/user">
         <i class="el-icon-menu"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
@@ -31,6 +30,11 @@
 <script>
 export default {
   name: "AsideBar",
+  data() {
+    return {
+      activePath: '/'
+    }
+  },
   methods: {
     handleOpen(key) {
       console.log(key);
@@ -39,12 +43,14 @@ export default {
       console.log(key);
     },
     handleSelect(key) {
-      switch (key) {
+      console.log(key);
+      /*switch (key) {
         case '2':
           console.log("###" + key)
           this.$router.push('/user').catch(reason => console.log(reason))
           break
-      }
+      }*/
+      // this.activePath = key
     }
   }
 }

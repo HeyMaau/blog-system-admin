@@ -19,7 +19,8 @@ import {
     BreadcrumbItem,
     Table,
     TableColumn,
-    Pagination
+    Pagination,
+    MessageBox
 } from 'element-ui';
 
 Vue.component(Container.name, Container);
@@ -42,3 +43,4 @@ Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(Pagination.name, Pagination);
 Vue.prototype.$message = Message
+Vue.prototype.$confirm = MessageBox.confirm

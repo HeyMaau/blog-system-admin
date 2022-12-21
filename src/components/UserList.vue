@@ -6,6 +6,7 @@
     </el-breadcrumb>
     <el-card>
       <el-table
+          border
           :data="userList"
           stripe
           style="width: 100%">
@@ -27,16 +28,25 @@
             prop="updateTime"
             label="更新时间">
         </el-table-column>
+
         <el-table-column
             align="center"
             min-width="10%"
             prop="state"
             label="状态">
+          <template slot-scope="scope">
+            <i v-if="scope.row.state == 1" class="el-icon-success"></i>
+            <i v-else class="el-icon-error"></i>
+          </template>
         </el-table-column>
         <el-table-column
             align="center"
             min-width="20%"
             label="操作">
+          <template slot-scope="scope">
+            <el-button v-if="scope.row.state == 1" type="danger" icon="el-icon-delete" size="mini"
+                       @click="deleteUser(scope.row.id)"></el-button>
+          </template>
         </el-table-column>
       </el-table>
       <el-pagination
@@ -53,7 +63,7 @@
 </template>
 
 <script>
-import {getUsers} from "@/apis/user_api";
+import {getUsers, deleteUser} from "@/apis/user_api";
 
 export default {
   name: "UserList",
@@ -81,8 +91,34 @@ export default {
     }
     ,
     handleCurrentChange(page) {
-      this.page = page
+      this.currentPage = page
       this.getUserList()
+    },
+    deleteUser(userID) {
+      this.$confirm('此操作将永久删除该用户, 是否继续?', '提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'warning'
+      }).then(async () => {
+        const {data: response} = await deleteUser(userID)
+        if (response.code === 20000) {
+          this.$message({
+            type: 'success',
+            message: '删除用户成功!'
+          });
+          this.getUserList()
+        } else {
+          this.$message({
+            type: 'error',
+            message: '系统繁忙，请稍后再试'
+          });
+        }
+      }).catch(() => {
+        this.$message({
+          type: 'info',
+          message: '已取消删除'
+        });
+      });
     }
   }
   ,
@@ -93,5 +129,15 @@ export default {
 </script>
 
 <style scoped>
+
+.el-icon-success {
+  color: #42b983;
+  font-size: 20px;
+}
+
+.el-icon-error {
+  color: red;
+  font-size: 20px;
+}
 
 </style>
