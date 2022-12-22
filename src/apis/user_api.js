@@ -12,11 +12,13 @@ export function login(key, user) {
     return request.post(`login/${key}/${captcha}`, user)
 }
 
-export function getUsers(page, size) {
+export function getUsers(user_name, state, page, size) {
     return request.get('list', {
         params: {
-            page: page,
-            size: size
+            user_name,
+            state,
+            page,
+            size
         }
     })
 }

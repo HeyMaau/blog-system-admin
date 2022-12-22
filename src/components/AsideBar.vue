@@ -3,7 +3,6 @@
     <el-menu
         :default-active="$route.path"
         router
-        @select="handleSelect"
         background-color="#545c64"
         text-color="#fff"
         active-text-color="#ffd04b">
@@ -30,29 +29,6 @@
 <script>
 export default {
   name: "AsideBar",
-  data() {
-    return {
-      activePath: '/'
-    }
-  },
-  methods: {
-    handleOpen(key) {
-      console.log(key);
-    },
-    handleClose(key) {
-      console.log(key);
-    },
-    handleSelect(key) {
-      console.log(key);
-      /*switch (key) {
-        case '2':
-          console.log("###" + key)
-          this.$router.push('/user').catch(reason => console.log(reason))
-          break
-      }*/
-      // this.activePath = key
-    }
-  }
 }
 </script>
 

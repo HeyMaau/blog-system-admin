@@ -5,6 +5,27 @@
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
+      <el-row class="search-bar" :gutter="20">
+        <el-col :span="8">
+          <el-input
+              clearable
+              @change="getUserList"
+              placeholder="请输入用户名或邮箱地址"
+              prefix-icon="el-icon-search"
+              v-model="searchInput">
+          </el-input>
+        </el-col>
+        <el-col :span="4">
+          <el-select v-model="searchState" clearable placeholder="请选择用户状态" @change="getUserList">
+            <el-option
+                v-for="item in stateOptions"
+                :key="item.value"
+                :label="item.label"
+                :value="item.value">
+            </el-option>
+          </el-select>
+        </el-col>
+      </el-row>
       <el-table
           border
           :data="userList"
@@ -28,7 +49,6 @@
             prop="updateTime"
             label="更新时间">
         </el-table-column>
-
         <el-table-column
             align="center"
             min-width="10%"
@@ -72,24 +92,31 @@ export default {
       currentPage: 1,
       userList: [],
       total: 0,
-      size: 5
+      size: 5,
+      searchInput: '',
+      searchState: '',
+      stateOptions: [{
+        value: '1',
+        label: '正常状态'
+      }, {
+        value: '0',
+        label: '删除状态'
+      }]
     }
   },
   methods: {
     async getUserList() {
-      const {data: response} = await getUsers(this.currentPage, this.size)
+      const {data: response} = await getUsers(this.searchInput, this.searchState, this.currentPage, this.size)
       if (response.code === 20000) {
         this.userList = response.data.content
         this.total = response.data.totalElements
       }
       console.log(response)
-    }
-    ,
+    },
     handleSizeChange(size) {
       this.size = size
       this.getUserList()
-    }
-    ,
+    },
     handleCurrentChange(page) {
       this.currentPage = page
       this.getUserList()
@@ -138,6 +165,10 @@ export default {
 .el-icon-error {
   color: red;
   font-size: 20px;
+}
+
+.search-bar {
+  margin-bottom: 10px;
 }
 
 </style>

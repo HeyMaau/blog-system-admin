@@ -20,7 +20,11 @@ import {
     Table,
     TableColumn,
     Pagination,
-    MessageBox
+    MessageBox,
+    Row,
+    Col,
+    Select,
+    Option
 } from 'element-ui';
 
 Vue.component(Container.name, Container);
@@ -42,5 +46,9 @@ Vue.component(BreadcrumbItem.name, BreadcrumbItem);
 Vue.component(Table.name, Table);
 Vue.component(TableColumn.name, TableColumn);
 Vue.component(Pagination.name, Pagination);
+Vue.component(Row.name, Row);
+Vue.component(Col.name, Col);
+Vue.component(Select.name, Select);
+Vue.component(Option.name, Option);
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm
