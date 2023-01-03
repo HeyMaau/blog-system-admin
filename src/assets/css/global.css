@@ -10,3 +10,13 @@ html, body {
 .el-pagination {
     margin-top: 20px;
 }
+
+.el-icon-success {
+    color: #42b983;
+    font-size: 20px;
+}
+
+.el-icon-error {
+    color: red;
+    font-size: 20px;
+}

@@ -14,6 +14,13 @@
         <i class="el-icon-menu"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
+      <el-submenu index="/article">
+        <template slot="title">
+          <i class="el-icon-location"></i>
+          <span>文章管理</span>
+        </template>
+          <el-menu-item index="/category">分类管理</el-menu-item>
+      </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
         <span slot="title">导航三</span>

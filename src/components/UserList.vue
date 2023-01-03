@@ -157,16 +157,6 @@ export default {
 
 <style scoped>
 
-.el-icon-success {
-  color: #42b983;
-  font-size: 20px;
-}
-
-.el-icon-error {
-  color: red;
-  font-size: 20px;
-}
-
 .search-bar {
   margin-bottom: 10px;
 }

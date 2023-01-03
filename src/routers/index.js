@@ -5,6 +5,7 @@ import Vue from "vue";
 import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
 import UserList from "@/components/UserList";
+import CategoryList from "@/components/CategoryList";
 
 import {getCookie} from "@/utils/cookie-util";
 
@@ -18,7 +19,8 @@ Vue.use(VueRouter)
 const routes = [
     {
         path: '/', component: MainPage, children: [
-            {path: 'user', component: UserList}
+            {path: 'user', component: UserList},
+            {path: 'category', component: CategoryList}
         ]
     },
     {path: '/login', component: LoginPage}
