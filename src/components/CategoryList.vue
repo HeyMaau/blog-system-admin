@@ -49,7 +49,7 @@
             <el-button v-else type="success" icon="el-icon-refresh-left" size="mini"
                        @click="recoverCategory(scope.row.id)"></el-button>
             <el-button v-if="scope.row.state == 1" type="info" icon="el-icon-setting" size="mini"
-                       @click="dialogVisible = true"></el-button>
+                       @click="showUpdateCategoryDialog(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
@@ -64,20 +64,33 @@
       </el-pagination>
     </el-card>
     <el-dialog
+        @close="onDialogClose"
         title="修改分类"
         :visible.sync="dialogVisible"
         width="50%">
+      <el-form ref="formRef" :model="category" label-width="80px" :rules="rules">
+        <el-form-item label="分类名称" prop="name">
+          <el-input v-model="category.name"></el-input>
+        </el-form-item>
+        <el-form-item label="分类拼音" prop="pinyin">
+          <el-input v-model="category.pinyin"></el-input>
+        </el-form-item>
+        <el-form-item label="分类描述" prop="description">
+          <el-input v-model="category.description"></el-input>
+        </el-form-item>
+      </el-form>
       <span slot="footer" class="dialog-footer">
         <el-button @click="dialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="dialogVisible = false">确 定</el-button>
+        <el-button type="primary" @click="updateCategory">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import {getCategories, recoverCategory, deleteCategory} from "@/apis/category_api";
+import {getCategories, recoverCategory, deleteCategory, updateCategory} from "@/apis/category_api";
 import {CODE_SUCCESS} from "@/utils/constants";
+import {deepClone} from "@/utils/clone-util";
 
 export default {
   name: "CategoryList",
@@ -87,7 +100,19 @@ export default {
       currentPage: 1,
       currentSize: 5,
       total: 0,
-      dialogVisible: false
+      dialogVisible: false,
+      category: {},
+      rules: {
+        name: [
+          {required: true, message: '请输入分类名称', trigger: 'blur'}
+        ],
+        pinyin: [
+          {required: true, message: '请输入分类拼音', trigger: 'blur'}
+        ],
+        description: [
+          {required: true, message: '请输入分类描述', trigger: 'blur'}
+        ]
+      }
     }
   },
   methods: {
@@ -133,14 +158,29 @@ export default {
         });
       });
     },
-    updateCategory(id) {
-      console.log(id)
+    showUpdateCategoryDialog(category) {
+      this.dialogVisible = true
+      this.category = deepClone(category)
     },
     async recoverCategory(id) {
       const {data: response} = await recoverCategory(id)
       if (response.code === CODE_SUCCESS) {
         this.getCategoryList()
         this.$message.success("恢复文章分类成功！")
+      } else {
+        this.$message.error(response.message)
+      }
+    },
+    onDialogClose() {
+      this.$refs.formRef.resetFields()
+    },
+    async updateCategory() {
+      const {data: response} = await updateCategory(this.category)
+      if (response.code === CODE_SUCCESS) {
+        this.$message.success("更新分类成功")
+        this.dialogVisible = false
+        this.$refs.formRef.resetFields()
+        this.getCategoryList()
       } else {
         this.$message.error(response.message)
       }
@@ -154,7 +194,7 @@ export default {
 
 <style scoped>
 
-.el-dialog__header {
+::v-deep .el-dialog__header {
   text-align: left;
 }
 
