@@ -26,3 +26,7 @@ export function deleteCategory(id) {
 export function updateCategory(category) {
     return request.put('', category)
 }
+
+export function addCategory(category) {
+    return request.post('', category)
+}

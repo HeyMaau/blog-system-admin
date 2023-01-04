@@ -6,6 +6,9 @@
       <el-breadcrumb-item>分类管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
+      <el-row class="add-category-button">
+        <el-button type="primary" @click="showAddCategoryDialog">添加分类</el-button>
+      </el-row>
       <el-table
           border
           :data="categoryList"
@@ -63,12 +66,13 @@
           :total="total">
       </el-pagination>
     </el-card>
+    <!--  修改分类对话框  -->
     <el-dialog
         @close="onDialogClose"
         title="修改分类"
-        :visible.sync="dialogVisible"
+        :visible.sync="updateCategoryDialogVisible"
         width="50%">
-      <el-form ref="formRef" :model="category" label-width="80px" :rules="rules">
+      <el-form ref="updateCategoryFormRef" :model="category" label-width="80px" :rules="rules">
         <el-form-item label="分类名称" prop="name">
           <el-input v-model="category.name"></el-input>
         </el-form-item>
@@ -80,15 +84,43 @@
         </el-form-item>
       </el-form>
       <span slot="footer" class="dialog-footer">
-        <el-button @click="dialogVisible = false">取 消</el-button>
+        <el-button @click="updateCategoryDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="updateCategory">确 定</el-button>
+      </span>
+    </el-dialog>
+    <!--  添加分类对话框  -->
+    <el-dialog
+        @close="onDialogClose"
+        title="修改分类"
+        :visible.sync="addCategoryDialogVisible"
+        width="50%">
+      <el-form ref="addCategoryFormRef" :model="category" label-width="80px" :rules="rules">
+        <el-form-item label="分类名称" prop="name">
+          <el-input v-model="category.name"></el-input>
+        </el-form-item>
+        <el-form-item label="分类拼音" prop="pinyin">
+          <el-input v-model="category.pinyin"></el-input>
+        </el-form-item>
+        <el-form-item label="分类描述" prop="description">
+          <el-input v-model="category.description"></el-input>
+        </el-form-item>
+        <el-form-item label="活动区域">
+          <el-select v-model="category.order" placeholder="请选择顺序">
+            <el-option label="正序" value="0"></el-option>
+            <el-option label="逆序" value="1"></el-option>
+          </el-select>
+        </el-form-item>
+      </el-form>
+      <span slot="footer" class="dialog-footer">
+        <el-button @click="addCategoryDialogVisible = false">取 消</el-button>
+        <el-button type="primary" @click="addCategory">确 定</el-button>
       </span>
     </el-dialog>
   </div>
 </template>
 
 <script>
-import {getCategories, recoverCategory, deleteCategory, updateCategory} from "@/apis/category_api";
+import {getCategories, recoverCategory, deleteCategory, updateCategory, addCategory} from "@/apis/category_api";
 import {CODE_SUCCESS} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 
@@ -100,7 +132,8 @@ export default {
       currentPage: 1,
       currentSize: 5,
       total: 0,
-      dialogVisible: false,
+      updateCategoryDialogVisible: false,
+      addCategoryDialogVisible: false,
       category: {},
       rules: {
         name: [
@@ -159,7 +192,7 @@ export default {
       });
     },
     showUpdateCategoryDialog(category) {
-      this.dialogVisible = true
+      this.updateCategoryDialogVisible = true
       this.category = deepClone(category)
     },
     async recoverCategory(id) {
@@ -172,14 +205,27 @@ export default {
       }
     },
     onDialogClose() {
-      this.$refs.formRef.resetFields()
+      this.$refs.updateCategoryFormRef.resetFields()
+      this.$refs.addCategoryFormRef.resetFields()
     },
     async updateCategory() {
       const {data: response} = await updateCategory(this.category)
       if (response.code === CODE_SUCCESS) {
         this.$message.success("更新分类成功")
-        this.dialogVisible = false
-        this.$refs.formRef.resetFields()
+        this.updateCategoryDialogVisible = false
+        this.getCategoryList()
+      } else {
+        this.$message.error(response.message)
+      }
+    },
+    showAddCategoryDialog() {
+      this.addCategoryDialogVisible = true
+    },
+    async addCategory() {
+      const {data: response} = await addCategory(this.category)
+      if (response.code === CODE_SUCCESS) {
+        this.$message.success("添加文章分类成功")
+        this.addCategoryDialogVisible = false
         this.getCategoryList()
       } else {
         this.$message.error(response.message)
@@ -195,6 +241,15 @@ export default {
 <style scoped>
 
 ::v-deep .el-dialog__header {
+  text-align: left;
+}
+
+.add-category-button {
+  text-align: left;
+  margin-bottom: 20px;
+}
+
+::v-deep .el-dialog__body {
   text-align: left;
 }
 
