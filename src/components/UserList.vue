@@ -64,7 +64,7 @@
             min-width="20%"
             label="操作">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.state == 1" type="danger" icon="el-icon-delete" size="mini"
+            <el-button v-if="scope.row.state === '1'" type="danger" icon="el-icon-delete" size="mini"
                        @click="deleteUser(scope.row.id)"></el-button>
           </template>
         </el-table-column>
@@ -84,6 +84,7 @@
 
 <script>
 import {getUsers, deleteUser} from "@/apis/user_api";
+import {CODE_SUCCESS} from "@/utils/constants";
 
 export default {
   name: "UserList",
@@ -128,7 +129,7 @@ export default {
         type: 'warning'
       }).then(async () => {
         const {data: response} = await deleteUser(userID)
-        if (response.code === 20000) {
+        if (response.code === CODE_SUCCESS) {
           this.$message({
             type: 'success',
             message: '删除用户成功!'

@@ -34,7 +34,7 @@
             prop="state"
             label="状态">
           <template slot-scope="scope">
-            <i v-if="scope.row.state == 1" class="el-icon-success"></i>
+            <i v-if="scope.row.state === '1'" class="el-icon-success"></i>
             <i v-else class="el-icon-error"></i>
           </template>
         </el-table-column>
@@ -47,11 +47,11 @@
             align="center"
             label="操作">
           <template slot-scope="scope">
-            <el-button v-if="scope.row.state == 1" type="danger" icon="el-icon-delete" size="mini"
+            <el-button v-if="scope.row.state === '1'" type="danger" icon="el-icon-delete" size="mini"
                        @click="deleteCategory(scope.row.id)"></el-button>
             <el-button v-else type="success" icon="el-icon-refresh-left" size="mini"
                        @click="recoverCategory(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state == 1" type="info" icon="el-icon-setting" size="mini"
+            <el-button v-if="scope.row.state === '1'" type="info" icon="el-icon-setting" size="mini"
                        @click="showUpdateCategoryDialog(scope.row)"></el-button>
           </template>
         </el-table-column>

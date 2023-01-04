@@ -6,6 +6,7 @@ import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
 import UserList from "@/components/UserList";
 import CategoryList from "@/components/CategoryList";
+import CommentList from "@/components/CommentList";
 
 import {getCookie} from "@/utils/cookie-util";
 
@@ -20,7 +21,8 @@ const routes = [
     {
         path: '/', component: MainPage, children: [
             {path: 'user', component: UserList},
-            {path: 'category', component: CategoryList}
+            {path: 'category', component: CategoryList},
+            {path: 'comment', component: CommentList}
         ]
     },
     {path: '/login', component: LoginPage}

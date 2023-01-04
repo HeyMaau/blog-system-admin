@@ -19,7 +19,8 @@
           <i class="el-icon-location"></i>
           <span>文章管理</span>
         </template>
-          <el-menu-item index="/category">分类管理</el-menu-item>
+        <el-menu-item index="/category">分类管理</el-menu-item>
+        <el-menu-item index="/comment">评论管理</el-menu-item>
       </el-submenu>
       <el-menu-item index="3">
         <i class="el-icon-document"></i>
