@@ -3,7 +3,7 @@
     <el-breadcrumb separator-class="el-icon-arrow-right">
       <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
       <el-breadcrumb-item>文章管理</el-breadcrumb-item>
-      <el-breadcrumb-item>评论管理</el-breadcrumb-item>
+      <el-breadcrumb-item>评论列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
       <el-row class="search-bar">
