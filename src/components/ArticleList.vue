@@ -6,18 +6,18 @@
       <el-breadcrumb-item>文章列表</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-row class="search-bar" :gutter="20">
+      <el-row class="search-bar" :gutter="10">
         <el-col :span="8">
           <el-input
               clearable
               @change="getArticleList"
-              placeholder="请输入用户名或邮箱地址"
+              placeholder="请输入邮箱关键字"
               prefix-icon="el-icon-search"
               v-model="searchInput">
           </el-input>
         </el-col>
-        <el-col :span="4">
-          <el-select v-model="searchState" clearable placeholder="请选择用户状态" @change="getArticleList">
+        <el-col :span="3">
+          <el-select v-model="searchState" clearable placeholder="请选择文章状态" @change="getArticleList">
             <el-option
                 v-for="item in stateOptions"
                 :key="item.value"
@@ -25,6 +25,9 @@
                 :value="item.value">
             </el-option>
           </el-select>
+        </el-col>
+        <el-col :span="13" id="add-article-btn">
+          <el-button type="primary">发表文章</el-button>
         </el-col>
       </el-row>
       <el-table
@@ -136,8 +139,14 @@ export default {
       searchState: '',
       searchCategory: '',
       stateOptions: [{
+        value: '2',
+        label: '发布状态'
+      }, {
         value: '1',
-        label: '正常状态'
+        label: '草稿状态'
+      }, {
+        value: '3',
+        label: '置顶状态'
       }, {
         value: '0',
         label: '删除状态'
@@ -149,12 +158,12 @@ export default {
       const {data: response} = await getArticles(this.currentPage, this.currentSize, this.searchInput, this.searchCategory, this.searchState)
       console.log(response)
       if (response.code === 20000) {
-        response.data.data.forEach(item => {
+        response.data.content.forEach(item => {
           item.labels = item.labels.split('-')
         })
         console.log(response)
-        this.articleList = response.data.data
-        this.total = response.data.total
+        this.articleList = response.data.content
+        this.total = response.data.totalElements
       }
     },
     handleSizeChange(size) {
@@ -215,6 +224,11 @@ export default {
 
 #label-tag {
   margin: 2px 3px;
+}
+
+#add-article-btn {
+  display: flex;
+  justify-content: right;
 }
 
 </style>

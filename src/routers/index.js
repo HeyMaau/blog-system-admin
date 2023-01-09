@@ -8,6 +8,7 @@ import UserList from "@/components/UserList";
 import CategoryList from "@/components/CategoryList";
 import CommentList from "@/components/CommentList";
 import ArticleList from "@/components/ArticleList";
+import EditArticle from "@/components/EditArticle";
 
 import {getCookie} from "@/utils/cookie-util";
 
@@ -24,7 +25,8 @@ const routes = [
             {path: 'user', component: UserList},
             {path: 'category', component: CategoryList},
             {path: 'comment', component: CommentList},
-            {path: 'article', component: ArticleList}
+            {path: 'article', component: ArticleList},
+            {path: 'article/:id', component: EditArticle}
         ]
     },
     {path: '/login', component: LoginPage}

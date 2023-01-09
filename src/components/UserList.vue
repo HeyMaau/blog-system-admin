@@ -5,7 +5,7 @@
       <el-breadcrumb-item>用户管理</el-breadcrumb-item>
     </el-breadcrumb>
     <el-card>
-      <el-row class="search-bar" :gutter="20">
+      <el-row class="search-bar" :gutter="10">
         <el-col :span="8">
           <el-input
               clearable
@@ -15,7 +15,7 @@
               v-model="searchInput">
           </el-input>
         </el-col>
-        <el-col :span="4">
+        <el-col :span="4" id="selector">
           <el-select v-model="searchState" clearable placeholder="请选择用户状态" @change="getUserList">
             <el-option
                 v-for="item in stateOptions"
@@ -160,6 +160,10 @@ export default {
 
 .search-bar {
   margin-bottom: 10px;
+}
+
+#selector {
+  width: auto;
 }
 
 </style>
