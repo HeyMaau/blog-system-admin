@@ -27,7 +27,7 @@
           </el-select>
         </el-col>
         <el-col :span="13" id="add-article-btn">
-          <el-button type="primary">发表文章</el-button>
+          <el-button type="primary" @click="addArticle">发表文章</el-button>
         </el-col>
       </el-row>
       <el-table
@@ -208,6 +208,9 @@ export default {
       } else {
         this.$message.error(response.message)
       }
+    },
+    addArticle(){
+      this.$router.push('/article/add')
     }
   },
   created() {

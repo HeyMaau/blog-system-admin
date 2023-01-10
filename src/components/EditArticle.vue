@@ -1,19 +1,30 @@
 <template>
-  <div>
-    <el-breadcrumb separator-class="el-icon-arrow-right">
-      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item>文章管理</el-breadcrumb-item>
-      <el-breadcrumb-item>编辑文章</el-breadcrumb-item>
-    </el-breadcrumb>
+  <div id="container">
+    <RtEditor/>
   </div>
 </template>
 
 <script>
+import RtEditor from "@/components/RtEditor";
+
 export default {
-  name: "EditArticle"
+  name: "EditArticle",
+  components: {
+    RtEditor
+  }
 }
 </script>
 
 <style scoped>
+
+#container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+
+.tinymce-editor {
+  width: 1000px;
+}
 
 </style>

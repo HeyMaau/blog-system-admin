@@ -25,11 +25,11 @@ const routes = [
             {path: 'user', component: UserList},
             {path: 'category', component: CategoryList},
             {path: 'comment', component: CommentList},
-            {path: 'article', component: ArticleList},
-            {path: 'article/:id', component: EditArticle}
+            {path: 'article', component: ArticleList}
         ]
     },
-    {path: '/login', component: LoginPage}
+    {path: '/login', component: LoginPage},
+    {path: '/article/:id', component: EditArticle}
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置
