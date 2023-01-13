@@ -6,7 +6,7 @@ const request = axios.create({
     withCredentials: true
 });
 
-export function getCategories(page, size) {
+export function getCategoriesApi(page, size) {
     return request.get('list', {
         params: {
             page,

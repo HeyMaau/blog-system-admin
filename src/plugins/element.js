@@ -26,7 +26,9 @@ import {
     Select,
     Option,
     Dialog,
-    Tag
+    Tag,
+    Upload,
+    Divider
 } from 'element-ui';
 
 Vue.component(Container.name, Container);
@@ -54,5 +56,7 @@ Vue.component(Select.name, Select);
 Vue.component(Option.name, Option);
 Vue.component(Dialog.name, Dialog);
 Vue.component(Tag.name, Tag);
+Vue.component(Upload.name, Upload);
+Vue.component(Divider.name, Divider);
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

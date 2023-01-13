@@ -25,3 +25,7 @@ export function deleteArticleApi(id) {
 export function topArticleApi(id) {
     return request.put(`top/${id}`)
 }
+
+export function addArticle(article) {
+    return request.post('', article)
+}

@@ -120,7 +120,7 @@
 </template>
 
 <script>
-import {getCategories, recoverCategory, deleteCategory, updateCategory, addCategory} from "@/apis/category_api";
+import {getCategoriesApi, recoverCategory, deleteCategory, updateCategory, addCategory} from "@/apis/category_api";
 import {CODE_SUCCESS} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 
@@ -158,7 +158,7 @@ export default {
       this.getCategoryList()
     },
     async getCategoryList() {
-      const {data: response} = await getCategories(this.currentPage, this.currentSize)
+      const {data: response} = await getCategoriesApi(this.currentPage, this.currentSize)
       console.log(response)
       if (response.code === CODE_SUCCESS) {
         this.categoryList = response.data.content

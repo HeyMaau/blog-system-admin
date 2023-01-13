@@ -109,7 +109,7 @@ export default {
         height: 500,//高度
         placeholder: '在这里输入文字',
 
-        branding: false,//隐藏右下角技术支持
+        branding: true,//隐藏右下角技术支持
         //图片上传
         /*images_upload_handler: function (blobInfo, success, failure) {
           //文件上传的formData传递，忘记为什么要用这个了
