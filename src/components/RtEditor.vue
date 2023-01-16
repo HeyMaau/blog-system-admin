@@ -25,6 +25,9 @@ import 'tinymce/plugins/lists' //列表插件
 import 'tinymce/plugins/charmap'  //特殊字符
 import 'tinymce/plugins/media' //插入编辑媒体
 import 'tinymce/plugins/wordcount'// 字数统计
+import 'tinymce/plugins/codesample'// 代码块
+import 'tinymce/plugins/table'// 表格
+import 'tinymce/plugins/autoresize'// 自适应尺寸
 import {uploadImage} from "@/apis/image_api";
 import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
 
@@ -75,12 +78,12 @@ export default {
     //插件
     plugins: {
       type: [String, Array],
-      default: 'advlist autolink link image lists charmap  media wordcount'
+      default: 'advlist autolink link image lists charmap media wordcount codesample table autoresize'
     },
     //工具栏
     toolbar: {
       type: [String, Array],
-      default: 'undo redo |  formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent | lists image media table'
+      default: 'undo redo |  formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent table | codesample image media'
     },
     triggerChange: {
       type: Boolean,
@@ -107,8 +110,9 @@ export default {
         toolbar_location: '/',
         fontsize_formats: '12px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 56px 72px',  //字体大小
         font_formats: fonts.join(";"),
-        height: 500,//高度
-        placeholder: '在这里输入文字',
+        min_height: 500,//高度
+        autoresize_bottom_margin: 20,
+        placeholder: '正文内容',
         branding: true,//隐藏右下角技术支持
         //图片上传
         images_upload_handler: async (blobInfo, success, failure) => {
