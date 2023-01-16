@@ -33,3 +33,7 @@ export function addArticleApi(article) {
 export function getArticleApi(id) {
     return request.get(id)
 }
+
+export function updateArticleApi(article) {
+    return request.put('', article)
+}

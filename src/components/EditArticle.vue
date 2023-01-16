@@ -64,8 +64,9 @@
       </div>
     </div>
     <div id="operation-container">
-      <el-button type="primary" @click="addArticle('2')">发布</el-button>
-      <el-button type="info" @click="addArticle('1')">保存</el-button>
+      <el-button type="primary" @click="addArticle('2')" v-if="article.state !== '2'">发布文章</el-button>
+      <el-button type="info" @click="addArticle('1')" v-if="article.state !== '2'">保存文章</el-button>
+      <el-button type="primary" @click="updateArticle" v-if="article.state === '2'">修改文章</el-button>
     </div>
   </div>
 </template>
@@ -74,7 +75,7 @@
 import RtEditor from "@/components/RtEditor";
 import {getCategoriesApi} from "@/apis/category_api";
 import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
-import {addArticleApi, getArticleApi} from "@/apis/article_api";
+import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
   name: "EditArticle",
@@ -117,6 +118,7 @@ export default {
       if (response.code === CODE_SUCCESS) {
         this.article = response.data
         this.imageUrl = URL_GET_IMAGE + response.data.cover
+        this.dynamicTags = response.data.labels.split('-')
       } else {
         this.$message.error(response.message)
       }
@@ -175,6 +177,15 @@ export default {
         this.$message.error(response.message)
       }
     },
+    async updateArticle() {
+      const {data: response} = await updateArticleApi(this.article)
+      if (response.code === CODE_SUCCESS) {
+        this.$message.success(response.message)
+        this.$router.push('/article')
+      } else {
+        this.$message.error(response.message)
+      }
+    }
   },
   mounted() {
     this.$refs.inputAreaRef.addEventListener('input', this.adjustTextareaHeight)
