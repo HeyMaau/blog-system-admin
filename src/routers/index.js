@@ -29,7 +29,7 @@ const routes = [
         ]
     },
     {path: '/login', component: LoginPage},
-    {path: '/article/:id', component: EditArticle}
+    {path: '/article/:id', component: EditArticle, name: 'editArticle'}
 ]
 
 // 3. 创建路由实例并传递 `routes` 配置

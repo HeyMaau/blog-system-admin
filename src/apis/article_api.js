@@ -26,6 +26,10 @@ export function topArticleApi(id) {
     return request.put(`top/${id}`)
 }
 
-export function addArticle(article) {
+export function addArticleApi(article) {
     return request.post('', article)
+}
+
+export function getArticleApi(id) {
+    return request.get(id)
 }

@@ -1,9 +1,9 @@
 <template>
   <div id="container">
     <label id="input-container">
-      <textarea id="input-area" placeholder="请输入标题" rows="1" ref="inputAreaRef" v-model="articleTitle"></textarea>
+      <textarea id="input-area" placeholder="请输入标题" rows="1" ref="inputAreaRef" v-model="article.title"></textarea>
     </label>
-    <RtEditor v-model="articleContent"/>
+    <RtEditor v-model="article.content"/>
     <el-divider></el-divider>
     <div id="setting-container">
       <div id="publish-setting-title">发布设置</div>
@@ -19,7 +19,7 @@
                 :show-file-list="false"
                 :on-success="handleCoverSuccess"
                 :before-upload="beforeCoverUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar" crossorigin="use-credentials">
               <i v-else class="el-icon-plus avatar-uploader-icon"> 添加文章封面</i>
             </el-upload>
           </el-col>
@@ -27,7 +27,7 @@
         <el-row class="setting-item" type="flex" align="middle">
           <el-col :span="3" class="setting-item-title">文章分类</el-col>
           <el-col :span="8">
-            <el-select v-model="selectCategoryID" placeholder="请选择文章分类">
+            <el-select v-model="article.categoryId" placeholder="请选择文章分类">
               <el-option
                   v-for="item in categoryList"
                   :key="item.id"
@@ -64,8 +64,8 @@
       </div>
     </div>
     <div id="operation-container">
-      <el-button type="primary" @click="publishArticle">发布</el-button>
-      <el-button type="info" @click="saveArticle">保存</el-button>
+      <el-button type="primary" @click="addArticle('2')">发布</el-button>
+      <el-button type="info" @click="addArticle('1')">保存</el-button>
     </div>
   </div>
 </template>
@@ -73,8 +73,8 @@
 <script>
 import RtEditor from "@/components/RtEditor";
 import {getCategoriesApi} from "@/apis/category_api";
-import {CODE_SUCCESS} from "@/utils/constants";
-import {addArticle} from "@/apis/article_api";
+import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
+import {addArticleApi, getArticleApi} from "@/apis/article_api";
 
 export default {
   name: "EditArticle",
@@ -83,15 +83,22 @@ export default {
   },
   data() {
     return {
-      articleTitle: '',
-      articleContent: '',
+      article: {
+        categoryId: '',
+        content: '',
+        cover: '',
+        id: '',
+        labels: '',
+        state: '',
+        summary: '',
+        title: '',
+        type: '0',
+      },
       imageUrl: '',
-      selectCategoryID: '',
       dynamicTags: [],
       inputVisible: false,
       inputValue: '',
       categoryList: [],
-      coverID: ''
     }
   },
   methods: {
@@ -105,12 +112,21 @@ export default {
         this.$message.error(response.message)
       }
     },
+    async getArticle(articleID) {
+      const {data: response} = await getArticleApi(articleID)
+      if (response.code === CODE_SUCCESS) {
+        this.article = response.data
+        this.imageUrl = URL_GET_IMAGE + response.data.cover
+      } else {
+        this.$message.error(response.message)
+      }
+    },
     adjustTextareaHeight(ev) {
       this.$refs.inputAreaRef.style.height = ev.target.scrollHeight + 'px'
     },
     handleCoverSuccess(res, file) {
       this.imageUrl = URL.createObjectURL(file.raw);
-      this.coverID = res.data.image_id
+      this.article.cover = res.data.image_id
     },
     beforeCoverUpload(file) {
       const isJPEG = file.type === 'image/jpeg';
@@ -143,17 +159,15 @@ export default {
       this.inputVisible = false;
       this.inputValue = '';
     },
-    async publishArticle() {
-      const article = {
-        categoryId: this.selectCategoryID,
-        content: this.articleContent,
-        cover: this.coverID,
-        labels: this.dynamicTags.join('-'),
-        state: '2',
-        title: this.articleTitle,
-        type: '0'
-      }
-      const {data: response} = await addArticle(article)
+    /**
+     * 发布/保存文章
+     * @param state '1'表示草稿，'2'表示发布
+     * @returns {Promise<void>}
+     */
+    async addArticle(state) {
+      this.article.labels = this.dynamicTags.join('-')
+      this.article.state = state
+      const {data: response} = await addArticleApi(this.article)
       if (response.code === CODE_SUCCESS) {
         this.$message.success(response.message)
         this.$router.push('/article')
@@ -161,24 +175,6 @@ export default {
         this.$message.error(response.message)
       }
     },
-    async saveArticle() {
-      const article = {
-        categoryId: this.selectCategoryID,
-        content: this.articleContent,
-        cover: this.coverID,
-        labels: this.dynamicTags.join('-'),
-        state: '1',
-        title: this.articleTitle,
-        type: '0'
-      }
-      const {data: response} = await addArticle(article)
-      if (response.code === CODE_SUCCESS) {
-        this.$message.success(response.message)
-        this.$router.push('/article')
-      } else {
-        this.$message.error(response.message)
-      }
-    }
   },
   mounted() {
     this.$refs.inputAreaRef.addEventListener('input', this.adjustTextareaHeight)
@@ -188,6 +184,10 @@ export default {
   },
   created() {
     this.getCategories()
+    const articleID = this.$route.params.id
+    if (articleID.indexOf('add') === -1) {
+      this.getArticle(articleID)
+    }
   }
 }
 </script>
@@ -243,8 +243,6 @@ export default {
 
 #setting-item-container {
   margin-left: 20px;
-  /*display: flex;
-  flex-direction: column;*/
 }
 
 ::v-deep .avatar-uploader .el-upload {

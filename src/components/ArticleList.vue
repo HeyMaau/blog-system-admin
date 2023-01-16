@@ -11,7 +11,7 @@
           <el-input
               clearable
               @change="getArticleList"
-              placeholder="请输入邮箱关键字"
+              placeholder="请输入文章关键字"
               prefix-icon="el-icon-search"
               v-model="searchInput">
           </el-input>
@@ -38,8 +38,10 @@
         <el-table-column
             align="center"
             min-width="16%"
-            prop="title"
             label="标题">
+          <template slot-scope="scope">
+            <router-link :to="{ name: 'editArticle', params: { id: scope.row.id }}">{{ scope.row.title }}</router-link>
+          </template>
         </el-table-column>
         <el-table-column
             align="center"
@@ -50,7 +52,6 @@
         <el-table-column
             align="center"
             min-width="12%"
-            prop="labels"
             label="标签">
           <template slot-scope="scope">
             <el-tag id="label-tag" v-for="(item, index) in scope.row.labels" :key="index">{{ item }}</el-tag>
@@ -81,7 +82,6 @@
         <el-table-column
             align="center"
             min-width="5%"
-            prop="state"
             label="状态">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.state === '0'" type="danger">删除</el-tag>
@@ -209,7 +209,7 @@ export default {
         this.$message.error(response.message)
       }
     },
-    addArticle(){
+    addArticle() {
       this.$router.push('/article/add')
     }
   },
@@ -232,6 +232,16 @@ export default {
 #add-article-btn {
   display: flex;
   justify-content: right;
+}
+
+a {
+  text-decoration: none;
+  color: #606266;
+}
+
+.router-link-active {
+  text-decoration: none;
+  color: #606266;
 }
 
 </style>
