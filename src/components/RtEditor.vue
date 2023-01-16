@@ -25,6 +25,8 @@ import 'tinymce/plugins/lists' //列表插件
 import 'tinymce/plugins/charmap'  //特殊字符
 import 'tinymce/plugins/media' //插入编辑媒体
 import 'tinymce/plugins/wordcount'// 字数统计
+import {uploadImage} from "@/apis/image_api";
+import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
 
 const fonts = [
   "宋体=宋体",
@@ -105,40 +107,26 @@ export default {
         toolbar_location: '/',
         fontsize_formats: '12px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 56px 72px',  //字体大小
         font_formats: fonts.join(";"),
-
         height: 500,//高度
         placeholder: '在这里输入文字',
-
         branding: true,//隐藏右下角技术支持
         //图片上传
-        /*images_upload_handler: function (blobInfo, success, failure) {
-          //文件上传的formData传递，忘记为什么要用这个了
-          const isAccord = blobInfo.blob().type === 'image/jpeg' || blobInfo.blob().type === 'image/png' || blobInfo.blob().type === 'image/GIF' || blobInfo.blob().type === 'image/jpg' || blobInfo.blob().type === 'image/BMP';
+        images_upload_handler: async (blobInfo, success, failure) => {
           if (blobInfo.blob().size / 1024 / 1024 > 2) {
             failure("上传失败，图片大小请控制在 2M 以内")
-          } else if (blobInfo.blob().type == isAccord) {
-            failure('图片格式错误')
           } else {
             let formData = new FormData()
             // 服务端接收文件的参数名，文件数据，文件名
             formData.append('file', blobInfo.blob(), blobInfo.filename())
-            axios({
-              method: 'POST',
-              headers: {
-                Authorization: 'bearer ' + Cookies.get('access_token')
-              },
-              // 这里是你的上传地址
-              url: window.SITE_CONFIG['apiURL'] + '/oss/file/upload',
-              data: formData,
-            }).then((res) => {
-              console.log(res)
-              // 这里返回的是你图片的地址
-              success(res.data.data.url)
-            }).catch(() => {
-              failure('上传失败')
-            })
+            const {data: response} = await uploadImage(formData)
+            if (response.code === CODE_SUCCESS) {
+              const imageUrl = URL_GET_IMAGE + response.data.image_id
+              success(imageUrl)
+            } else {
+              failure(response.message)
+            }
           }
-        }*/
+        }
       }
     }
   },
@@ -157,7 +145,6 @@ export default {
   },
   mounted() {
     tinymce.init({})
-    // console.log(this.toolbar,'======')
   },
   methods: {
     onClick(e) {
