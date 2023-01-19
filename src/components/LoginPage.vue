@@ -9,7 +9,7 @@
         <el-form-item prop="password">
           <el-input v-model="loginForm.password" placeholder="密码" show-password></el-input>
         </el-form-item>
-        <div class="captcha-input" style="display: flex; align-items: center">
+        <div class="captcha-input" style="display: flex; align-items: center" @keypress.enter="doLogin">
           <el-form-item style="margin-right: 20px" prop="captcha">
             <el-input v-model="loginForm.captcha" placeholder="验证码"></el-input>
           </el-form-item>
