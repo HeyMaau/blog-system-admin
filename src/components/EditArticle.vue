@@ -15,7 +15,7 @@
                 :with-credentials="true"
                 accept=".jpg,.jpeg,.png"
                 class="avatar-uploader"
-                action="http://localhost:8080/admin/image"
+                :action="uploadImagePath"
                 :show-file-list="false"
                 :on-success="handleCoverSuccess"
                 :before-upload="beforeCoverUpload">
@@ -74,7 +74,7 @@
 <script>
 import RtEditor from "@/components/RtEditor";
 import {getCategoriesApi} from "@/apis/category_api";
-import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
@@ -100,6 +100,7 @@ export default {
       inputVisible: false,
       inputValue: '',
       categoryList: [],
+      uploadImagePath: URL_IMAGE
     }
   },
   methods: {
@@ -117,7 +118,7 @@ export default {
       const {data: response} = await getArticleApi(articleID)
       if (response.code === CODE_SUCCESS) {
         this.article = response.data
-        this.imageUrl = URL_GET_IMAGE + response.data.cover
+        this.imageUrl = URL_IMAGE + response.data.cover
         this.dynamicTags = response.data.labels.split('-')
       } else {
         this.$message.error(response.message)
@@ -167,6 +168,7 @@ export default {
      * @returns {Promise<void>}
      */
     async addArticle(state) {
+      let previousState = this.article.state
       this.article.labels = this.dynamicTags.join('-')
       this.article.state = state
       const {data: response} = await addArticleApi(this.article)
@@ -175,6 +177,7 @@ export default {
         this.$router.push('/article')
       } else {
         this.$message.error(response.message)
+        this.article.state = previousState
       }
     },
     async updateArticle() {

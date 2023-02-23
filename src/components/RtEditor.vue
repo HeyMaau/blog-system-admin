@@ -29,7 +29,7 @@ import 'tinymce/plugins/codesample'// 代码块
 import 'tinymce/plugins/table'// 表格
 import 'tinymce/plugins/autoresize'// 自适应尺寸
 import {uploadImage} from "@/apis/image_api";
-import {CODE_SUCCESS, URL_GET_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 
 const fonts = [
   "宋体=宋体",
@@ -124,7 +124,7 @@ export default {
             formData.append('file', blobInfo.blob(), blobInfo.filename())
             const {data: response} = await uploadImage(formData)
             if (response.code === CODE_SUCCESS) {
-              const imageUrl = URL_GET_IMAGE + response.data.image_id
+              const imageUrl = URL_IMAGE + response.data.image_id
               success(imageUrl)
             } else {
               failure(response.message)

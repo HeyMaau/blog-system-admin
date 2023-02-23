@@ -1,7 +1,8 @@
 import axios from "axios";
+import {URL_IMAGE} from "@/utils/constants";
 
 const request = axios.create({
-    baseURL: 'http://localhost:8080/admin/image',
+    baseURL: URL_IMAGE,
     timeout: 5000,
     withCredentials: true
 });
