@@ -99,12 +99,14 @@ export default {
           {required: true, message: '请输入验证码', trigger: 'blur'}
         ]
       },
-      captchaUrl: ''
+      captchaUrl: '',
+      captchaKey: ''
     }
   },
   methods: {
     getCaptcha() {
-      this.captchaUrl = "http://localhost:8080/user/captcha?captcha_key=" + Date.now()
+      this.captchaKey = Date.now()
+      this.captchaUrl = "http://localhost:8080/user/captcha?captcha_key=" + this.captchaKey
     },
     async doLogin() {
       try {
