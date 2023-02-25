@@ -13,7 +13,8 @@
           <el-form-item style="margin-right: 20px" prop="captcha">
             <el-input v-model="loginForm.captcha" placeholder="验证码"></el-input>
           </el-form-item>
-          <img ref="captchaImgRef" style="height:30px; width: 100px; margin-bottom: 22px"/>
+          <img :src="captchaUrl" style="height:30px; width: 100px; margin-bottom: 22px"
+               @click="getCaptcha" class="captcha-img"/>
         </div>
       </el-form>
       <el-button type="primary" class="login-button" @click="doLogin">登录</el-button>
@@ -44,12 +45,12 @@ export default {
           {required: true, message: '请输入验证码', trigger: 'blur'}
         ]
       },
-      captchaKey: Date.now()
+      captchaUrl: ''
     }
   },
   methods: {
     getCaptcha() {
-      this.$refs.captchaImgRef.src = "http://localhost:8080/user/captcha?captcha_key=" + this.captchaKey
+      this.captchaUrl = "http://localhost:8080/user/captcha?captcha_key=" + Date.now()
     },
     async doLogin() {
       try {
@@ -107,6 +108,10 @@ form, .el-button {
 .login-form-title {
   font-size: 20px;
   margin-bottom: 20px;
+}
+
+.captcha-img {
+  cursor: pointer;
 }
 
 </style>
