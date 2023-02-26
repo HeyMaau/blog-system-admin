@@ -16,7 +16,7 @@
               v-model="searchInput">
           </el-input>
         </el-col>
-        <el-col :span="3">
+        <el-col :span="4">
           <el-select v-model="searchState" clearable placeholder="请选择文章状态" @change="getArticleList">
             <el-option
                 v-for="item in stateOptions"
@@ -26,7 +26,7 @@
             </el-option>
           </el-select>
         </el-col>
-        <el-col :span="13" id="add-article-btn">
+        <el-col :span="12" id="add-article-btn">
           <el-button type="primary" @click="addArticle">发表文章</el-button>
         </el-col>
       </el-row>
@@ -42,12 +42,6 @@
           <template slot-scope="scope">
             <router-link :to="{ name: 'editArticle', params: { id: scope.row.id }}">{{ scope.row.title }}</router-link>
           </template>
-        </el-table-column>
-        <el-table-column
-            align="center"
-            min-width="15%"
-            prop="summary"
-            label="摘要">
         </el-table-column>
         <el-table-column
             align="center"
@@ -71,7 +65,7 @@
         </el-table-column>
         <el-table-column
             align="center"
-            min-width="7%"
+            min-width="9%"
             prop="type"
             label="类型">
           <template slot-scope="scope">
@@ -81,7 +75,7 @@
         </el-table-column>
         <el-table-column
             align="center"
-            min-width="5%"
+            min-width="10%"
             label="状态">
           <template slot-scope="scope">
             <el-tag v-if="scope.row.state === '0'" type="danger">删除</el-tag>
@@ -92,13 +86,13 @@
         </el-table-column>
         <el-table-column
             align="center"
-            min-width="15%"
+            min-width="18%"
             prop="updateTime"
             label="修改时间">
         </el-table-column>
         <el-table-column
             align="center"
-            min-width="10%"
+            min-width="15%"
             label="操作">
           <template slot-scope="scope">
             <el-button v-if="scope.row.state !== '0'" type="danger" icon="el-icon-delete" size="mini"
