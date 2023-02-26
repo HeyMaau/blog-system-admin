@@ -2,9 +2,7 @@
   <div id="container">
     <div class="logo-container">
       <svg xmlns:xlink="http://www.w3.org/1999/xlink" xmlns="http://www.w3.org/2000/svg" version="1.1"
-
            viewBox="0 0 1630 1024" height="256px" width="407px">
-        <title>缺省页-联系人</title>
         <g fill-rule="evenodd" fill="none" stroke-width="1" stroke="none" id="页面-1">
           <g id="缺省页-联系人">
             <ellipse ry="427.56871" rx="426.184481" cy="464.805074" cx="1091.11266" fill="#EFF0F9"

@@ -3,34 +3,26 @@
     <el-menu
         :default-active="$route.path"
         router
-        background-color="#545c64"
+        background-color="#409EFF"
         text-color="#fff"
-        active-text-color="#ffd04b">
+        active-text-color="#f0c800">
       <el-menu-item index="/">
-        <i class="el-icon-menu"></i>
+        <i class="el-icon-pie-chart"></i>
         <span slot="title">首页</span>
       </el-menu-item>
       <el-menu-item index="/user">
-        <i class="el-icon-menu"></i>
+        <i class="el-icon-user"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
       <el-submenu index="/article">
         <template slot="title">
-          <i class="el-icon-location"></i>
+          <i class="el-icon-notebook-2"></i>
           <span>文章管理</span>
         </template>
         <el-menu-item index="/article">文章列表</el-menu-item>
         <el-menu-item index="/category">分类列表</el-menu-item>
         <el-menu-item index="/comment">评论列表</el-menu-item>
       </el-submenu>
-      <el-menu-item index="3">
-        <i class="el-icon-document"></i>
-        <span slot="title">导航三</span>
-      </el-menu-item>
-      <el-menu-item index="4">
-        <i class="el-icon-setting"></i>
-        <span slot="title">导航四</span>
-      </el-menu-item>
     </el-menu>
   </div>
 </template>
@@ -42,5 +34,14 @@ export default {
 </script>
 
 <style scoped>
+
+.el-menu {
+  border: 0;
+  font-weight: bold;
+}
+
+.el-submenu__title i, .el-menu-item i {
+  color: white;
+}
 
 </style>
