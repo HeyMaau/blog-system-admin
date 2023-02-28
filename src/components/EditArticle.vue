@@ -64,9 +64,9 @@
       </div>
     </div>
     <div id="operation-container">
-      <el-button type="primary" @click="addArticle('2')" v-if="article.state !== '2'">发布文章</el-button>
-      <el-button type="info" @click="addArticle('1')" v-if="article.state !== '2'">保存文章</el-button>
-      <el-button type="primary" @click="updateArticle" v-if="article.state === '2'">修改文章</el-button>
+      <el-button type="primary" @click="addArticle('2')" v-if="articleState !== '2'">发布文章</el-button>
+      <el-button type="info" @click="addArticle('1')" v-if="articleState !== '2'">保存文章</el-button>
+      <el-button type="primary" @click="updateArticle" v-if="articleState === '2'">修改文章</el-button>
     </div>
   </div>
 </template>
@@ -95,6 +95,7 @@ export default {
         title: '',
         type: '0',
       },
+      articleState: '',
       imageUrl: '',
       dynamicTags: [],
       inputVisible: false,
@@ -118,13 +119,17 @@ export default {
       const {data: response} = await getArticleApi(articleID)
       if (response.code === CODE_SUCCESS) {
         this.article = response.data
-        this.imageUrl = URL_IMAGE + response.data.cover
+        if (response.data.cover.length !== 0) {
+          this.imageUrl = URL_IMAGE + response.data.cover
+        }
         this.dynamicTags = response.data.labels.split('-')
+        this.articleState = response.data.state
       } else {
         this.$message.error(response.message)
       }
     },
     adjustTextareaHeight(ev) {
+      this.$refs.inputAreaRef.style.height = 'inherit'
       this.$refs.inputAreaRef.style.height = ev.target.scrollHeight + 'px'
     },
     handleCoverSuccess(res, file) {
