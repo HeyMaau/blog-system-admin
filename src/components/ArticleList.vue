@@ -150,12 +150,10 @@ export default {
   methods: {
     async getArticleList() {
       const {data: response} = await getArticles(this.currentPage, this.currentSize, this.searchInput, this.searchCategory, this.searchState)
-      console.log(response)
       if (response.code === 20000) {
         response.data.content.forEach(item => {
           item.labels = item.labels.split('-')
         })
-        console.log(response)
         this.articleList = response.data.content
         this.total = response.data.totalElements
       }

@@ -112,7 +112,6 @@ export default {
         this.userList = response.data.content
         this.total = response.data.totalElements
       }
-      console.log(response)
     },
     handleSizeChange(size) {
       this.size = size

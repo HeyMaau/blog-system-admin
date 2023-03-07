@@ -4,7 +4,6 @@ export function getCookie(key) {
     cookies.forEach(value => {
         if (value.startsWith(key, 0)) {
             let split = value.split("=");
-            console.log(split)
             cookie = split[1]
         }
     })

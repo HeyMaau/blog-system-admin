@@ -159,7 +159,6 @@ export default {
     },
     async getCategoryList() {
       const {data: response} = await getCategoriesApi(this.currentPage, this.currentSize)
-      console.log(response)
       if (response.code === CODE_SUCCESS) {
         this.categoryList = response.data.content
         this.total = response.data.totalElements
