@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-    baseURL: 'http://localhost:8080/admin/comment/',
+    baseURL: process.env.VUE_APP_SERVER_PATH + '/admin/comment/',
     timeout: 5000,
     withCredentials: true
 });

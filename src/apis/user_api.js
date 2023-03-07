@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-    baseURL: 'http://localhost:8080/user/',
+    baseURL: process.env.VUE_APP_SERVER_PATH + '/user/',
     timeout: 5000,
     withCredentials: true
 });

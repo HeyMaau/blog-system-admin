@@ -1,7 +1,7 @@
 import axios from "axios";
 
 const request = axios.create({
-    baseURL: 'http://localhost:8080/admin/article/',
+    baseURL: process.env.VUE_APP_SERVER_PATH + '/admin/article/',
     timeout: 5000,
     withCredentials: true
 });
