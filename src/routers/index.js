@@ -14,7 +14,9 @@ import {getCookie} from "@/utils/cookie-util";
 
 import * as Constants from "@/utils/constants"
 
-Vue.use(VueRouter)
+if (process.env.NODE_ENV !== 'production') {
+    Vue.use(VueRouter)
+}
 
 // 2. 定义一些路由
 // 每个路由都需要映射到一个组件。
