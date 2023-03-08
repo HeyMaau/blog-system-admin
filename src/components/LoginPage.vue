@@ -111,6 +111,7 @@ export default {
         const {data: response} = await login(this.captchaKey, this.loginForm)
         if (response.code === 20000) {
           this.$message.success("登录成功")
+          sessionStorage.setItem('token',response.data.token_key)
           this.$router.push('/')
         } else {
           this.$message.error(response.message)

@@ -3,7 +3,8 @@ import axios from "axios";
 const request = axios.create({
     baseURL: process.env.VUE_APP_SERVER_PATH + '/user/',
     timeout: 5000,
-    withCredentials: true
+    withCredentials: true,
+    headers: {'Authorization': sessionStorage.getItem('token')}
 });
 
 export function login(key, user) {

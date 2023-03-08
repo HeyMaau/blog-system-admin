@@ -10,10 +10,6 @@ import CommentList from "@/components/CommentList";
 import ArticleList from "@/components/ArticleList";
 import EditArticle from "@/components/EditArticle";
 
-import {getCookie} from "@/utils/cookie-util";
-
-import * as Constants from "@/utils/constants"
-
 if (process.env.NODE_ENV !== 'production') {
     Vue.use(VueRouter)
 }
@@ -44,8 +40,8 @@ const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
     if (to.path !== "/login") {
-        let cookie = getCookie(Constants.KEY_COOKIE_TOKEN);
-        if (cookie == null || cookie.length === 0) {
+        let token = sessionStorage.getItem('token');
+        if (token == null || token.length === 0) {
             next('/login')
         }
     }
