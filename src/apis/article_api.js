@@ -4,8 +4,12 @@ const request = axios.create({
     baseURL: process.env.VUE_APP_SERVER_PATH + '/admin/article/',
     timeout: 5000,
     withCredentials: true,
-    headers: {'Authorization': sessionStorage.getItem('token')}
 });
+
+request.interceptors.request.use(config => {
+    config.headers['authorization'] = sessionStorage.getItem('token')
+    return config
+})
 
 export function getArticles(page, size, keywords, category, state) {
     return request.get('list', {
