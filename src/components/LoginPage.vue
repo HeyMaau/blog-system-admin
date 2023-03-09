@@ -104,15 +104,15 @@ export default {
   methods: {
     getCaptcha() {
       this.captchaKey = Date.now()
-      this.captchaUrl = "http://localhost:8080/user/captcha?captcha_key=" + this.captchaKey
+      this.captchaUrl = process.env.VUE_APP_SERVER_PATH + "/user/captcha?captcha_key=" + this.captchaKey
     },
     async doLogin() {
       try {
         const {data: response} = await login(this.captchaKey, this.loginForm)
         if (response.code === 20000) {
           this.$message.success("登录成功")
-          sessionStorage.setItem('token',response.data.token_key)
-          this.$router.push('/')
+          sessionStorage.setItem('token', response.data.token_key)
+          this.$router.push(process.env.VUE_APP_ROUTER_PREFIX)
         } else {
           this.$message.error(response.message)
         }

@@ -1,7 +1,7 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
-    publicPath: '/admin',
+    publicPath: './',
     configureWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
             config.externals = [
