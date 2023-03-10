@@ -6,22 +6,22 @@
         background-color="#409EFF"
         text-color="#fff"
         active-text-color="#f0c800">
-      <el-menu-item :index="process.env.VUE_APP_ROUTER_PREFIX">
+      <el-menu-item index="/">
         <i class="el-icon-pie-chart"></i>
         <span slot="title">首页</span>
       </el-menu-item>
-      <el-menu-item :index="process.env.VUE_APP_ROUTER_PREFIX + '/user'">
+      <el-menu-item index="/user">
         <i class="el-icon-user"></i>
         <span slot="title">用户管理</span>
       </el-menu-item>
-      <el-submenu :index="process.env.VUE_APP_ROUTER_PREFIX + '/article'">
+      <el-submenu index="/article">
         <template slot="title">
           <i class="el-icon-notebook-2"></i>
           <span>文章管理</span>
         </template>
-        <el-menu-item :index="process.env.VUE_APP_ROUTER_PREFIX + '/article'">文章列表</el-menu-item>
-        <el-menu-item :index="process.env.VUE_APP_ROUTER_PREFIX + '/category'">分类列表</el-menu-item>
-        <el-menu-item :index="process.env.VUE_APP_ROUTER_PREFIX + '/comment'">评论列表</el-menu-item>
+        <el-menu-item index="/article">文章列表</el-menu-item>
+        <el-menu-item index="/category">分类列表</el-menu-item>
+        <el-menu-item index="/comment">评论列表</el-menu-item>
       </el-submenu>
     </el-menu>
   </div>

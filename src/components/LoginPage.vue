@@ -112,7 +112,7 @@ export default {
         if (response.code === 20000) {
           this.$message.success("登录成功")
           sessionStorage.setItem('token', response.data.token_key)
-          this.$router.push(process.env.VUE_APP_ROUTER_PREFIX)
+          this.$router.push('/')
         } else {
           this.$message.error(response.message)
         }
