@@ -12,14 +12,14 @@
           <el-col :span="3" class="setting-item-title">文章封面</el-col>
           <el-col :span="8">
             <el-upload
-                :with-credentials="true"
+                :headers="{'authorization': token}"
                 accept=".jpg,.jpeg,.png"
                 class="avatar-uploader"
                 :action="uploadImagePath"
                 :show-file-list="false"
                 :on-success="handleCoverSuccess"
                 :before-upload="beforeCoverUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar" crossorigin="use-credentials">
+              <img v-if="imageUrl" :src="imageUrl" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"> 添加文章封面</i>
             </el-upload>
           </el-col>
@@ -101,7 +101,8 @@ export default {
       inputVisible: false,
       inputValue: '',
       categoryList: [],
-      uploadImagePath: URL_IMAGE
+      uploadImagePath: URL_IMAGE,
+      token: sessionStorage.getItem('token')
     }
   },
   methods: {
