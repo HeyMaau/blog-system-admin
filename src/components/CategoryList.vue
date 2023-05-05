@@ -68,7 +68,6 @@
     </el-card>
     <!--  修改分类对话框  -->
     <el-dialog
-        @open="onDialogOpen"
         title="修改分类"
         :visible.sync="updateCategoryDialogVisible"
         width="50%">
@@ -83,6 +82,20 @@
           <el-input v-model="category.description"></el-input>
         </el-form-item>
       </el-form>
+      <div class="cover-setting-container">
+        <div class="cover-setting-title">分类封面</div>
+        <el-upload
+            class="avatar-uploader"
+            :headers="{'authorization': token}"
+            :action="uploadCoverUrl"
+            :show-file-list="false"
+            :on-success="handleUploadCoverSuccess"
+            :on-error="handleUploadCoverError"
+            :before-upload="beforeCoverUpload">
+          <img v-if="coverUrl" :src="coverUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="updateCategoryDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="updateCategory">确 定</el-button>
@@ -90,8 +103,7 @@
     </el-dialog>
     <!--  添加分类对话框  -->
     <el-dialog
-        @open="onDialogOpen"
-        title="修改分类"
+        title="添加分类"
         :visible.sync="addCategoryDialogVisible"
         width="50%">
       <el-form ref="addCategoryFormRef" :model="category" label-width="80px" :rules="rules">
@@ -215,7 +227,11 @@ export default {
     },
     showUpdateCategoryDialog(category) {
       this.updateCategoryDialogVisible = true
+      this.resetCategoryForm()
       this.category = deepClone(category)
+      if (this.category.cover !== undefined && this.category.cover.length !== 0) {
+        this.setCategoryCover(this.category.cover)
+      }
     },
     async recoverCategory(id) {
       const {data: response} = await recoverCategory(id)
@@ -225,16 +241,6 @@ export default {
       } else {
         this.$message.error(response.message)
       }
-    },
-    onDialogOpen() {
-      this.$nextTick(() => {
-        if (this.$refs.updateCategoryFormRef !== undefined) {
-          this.$refs.updateCategoryFormRef.resetFields()
-        }
-        if (this.$refs.addCategoryFormRef !== undefined) {
-          this.$refs.addCategoryFormRef.resetFields()
-        }
-      })
     },
     async updateCategory() {
       const {data: response} = await updateCategory(this.category)
@@ -248,6 +254,7 @@ export default {
     },
     showAddCategoryDialog() {
       this.addCategoryDialogVisible = true
+      this.resetCategoryForm()
     },
     async addCategory() {
       const {data: response} = await addCategory(this.category)
@@ -278,6 +285,17 @@ export default {
     },
     handleUploadCoverError() {
       this.$message.error('上传封面失败')
+    },
+    setCategoryCover(coverID) {
+      this.coverUrl = URL_IMAGE + coverID
+    },
+    resetCategoryForm() {
+      this.category.name = ''
+      this.category.description = ''
+      this.category.pinyin = ''
+      this.category.order = ''
+      this.category.cover = ''
+      this.coverUrl = ''
     }
   },
   created() {
