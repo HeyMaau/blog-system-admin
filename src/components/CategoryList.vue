@@ -68,7 +68,7 @@
     </el-card>
     <!--  修改分类对话框  -->
     <el-dialog
-        @close="onDialogClose"
+        @open="onDialogOpen"
         title="修改分类"
         :visible.sync="updateCategoryDialogVisible"
         width="50%">
@@ -90,7 +90,7 @@
     </el-dialog>
     <!--  添加分类对话框  -->
     <el-dialog
-        @close="onDialogClose"
+        @open="onDialogOpen"
         title="修改分类"
         :visible.sync="addCategoryDialogVisible"
         width="50%">
@@ -104,13 +104,27 @@
         <el-form-item label="分类描述" prop="description">
           <el-input v-model="category.description"></el-input>
         </el-form-item>
-        <el-form-item label="活动区域">
+        <el-form-item label="排列顺序" prop="order">
           <el-select v-model="category.order" placeholder="请选择顺序">
             <el-option label="正序" value="0"></el-option>
             <el-option label="逆序" value="1"></el-option>
           </el-select>
         </el-form-item>
       </el-form>
+      <div class="cover-setting-container">
+        <div class="cover-setting-title">分类封面</div>
+        <el-upload
+            class="avatar-uploader"
+            :headers="{'authorization': token}"
+            :action="uploadCoverUrl"
+            :show-file-list="false"
+            :on-success="handleUploadCoverSuccess"
+            :on-error="handleUploadCoverError"
+            :before-upload="beforeCoverUpload">
+          <img v-if="coverUrl" :src="coverUrl" class="avatar">
+          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        </el-upload>
+      </div>
       <span slot="footer" class="dialog-footer">
         <el-button @click="addCategoryDialogVisible = false">取 消</el-button>
         <el-button type="primary" @click="addCategory">确 定</el-button>
@@ -121,7 +135,7 @@
 
 <script>
 import {getCategoriesApi, recoverCategory, deleteCategory, updateCategory, addCategory} from "@/apis/category_api";
-import {CODE_SUCCESS} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 
 export default {
@@ -134,7 +148,13 @@ export default {
       total: 0,
       updateCategoryDialogVisible: false,
       addCategoryDialogVisible: false,
-      category: {},
+      category: {
+        name: '',
+        pinyin: '',
+        description: '',
+        order: '',
+        cover: ''
+      },
       rules: {
         name: [
           {required: true, message: '请输入分类名称', trigger: 'blur'}
@@ -145,7 +165,10 @@ export default {
         description: [
           {required: true, message: '请输入分类描述', trigger: 'blur'}
         ]
-      }
+      },
+      uploadCoverUrl: URL_IMAGE,
+      coverUrl: '',
+      token: sessionStorage.getItem('token')
     }
   },
   methods: {
@@ -203,9 +226,15 @@ export default {
         this.$message.error(response.message)
       }
     },
-    onDialogClose() {
-      this.$refs.updateCategoryFormRef.resetFields()
-      this.$refs.addCategoryFormRef.resetFields()
+    onDialogOpen() {
+      this.$nextTick(() => {
+        if (this.$refs.updateCategoryFormRef !== undefined) {
+          this.$refs.updateCategoryFormRef.resetFields()
+        }
+        if (this.$refs.addCategoryFormRef !== undefined) {
+          this.$refs.addCategoryFormRef.resetFields()
+        }
+      })
     },
     async updateCategory() {
       const {data: response} = await updateCategory(this.category)
@@ -229,6 +258,26 @@ export default {
       } else {
         this.$message.error(response.message)
       }
+    },
+    handleUploadCoverSuccess(res, file) {
+      this.coverUrl = URL.createObjectURL(file.raw);
+      this.$message.success('上传封面成功')
+      this.category.cover = res.data.image_id
+    },
+    beforeCoverUpload(file) {
+      const isJPG = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png';
+      const isLt2M = file.size / 1024 / 1024 < 2;
+
+      if (!isJPG) {
+        this.$message.error('上传封面只能是JPG/PNG格式');
+      }
+      if (!isLt2M) {
+        this.$message.error('上传封面片大小不能超过2MB');
+      }
+      return isJPG && isLt2M;
+    },
+    handleUploadCoverError() {
+      this.$message.error('上传封面失败')
     }
   },
   created() {
@@ -250,6 +299,45 @@ export default {
 
 ::v-deep .el-dialog__body {
   text-align: left;
+}
+
+::v-deep .avatar-uploader .el-upload {
+  border: 1px dashed #d9d9d9;
+  border-radius: 6px;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+}
+
+::v-deep .avatar-uploader .el-upload:hover {
+  border-color: #409EFF;
+}
+
+.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 100px;
+  height: 100px;
+  line-height: 100px;
+  text-align: center;
+}
+
+.avatar {
+  width: 100px;
+  height: 100px;
+  display: block;
+}
+
+.cover-setting-container {
+  display: flex;
+}
+
+.cover-setting-title {
+  width: 80px;
+  text-align: right;
+  font-size: 14px;
+  padding-right: 12px;
+  box-sizing: border-box;
 }
 
 </style>
