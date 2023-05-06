@@ -31,3 +31,7 @@ export function getUsers(user_name, state, page, size) {
 export function deleteUser(userID) {
     return request.delete(`${userID}`)
 }
+
+export function updateUserApi(user) {
+    return request.put('user_info/admin', user)
+}

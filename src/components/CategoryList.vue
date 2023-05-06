@@ -279,7 +279,7 @@ export default {
         this.$message.error('上传封面只能是JPG/PNG格式');
       }
       if (!isLt2M) {
-        this.$message.error('上传封面片大小不能超过2MB');
+        this.$message.error('上传封面大小不能超过2MB');
       }
       return isJPG && isLt2M;
     },
@@ -304,6 +304,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/avatar.css" scoped></style>
 <style scoped>
 
 ::v-deep .el-dialog__header {
@@ -317,45 +318,6 @@ export default {
 
 ::v-deep .el-dialog__body {
   text-align: left;
-}
-
-::v-deep .avatar-uploader .el-upload {
-  border: 1px dashed #d9d9d9;
-  border-radius: 6px;
-  cursor: pointer;
-  position: relative;
-  overflow: hidden;
-}
-
-::v-deep .avatar-uploader .el-upload:hover {
-  border-color: #409EFF;
-}
-
-.avatar-uploader-icon {
-  font-size: 28px;
-  color: #8c939d;
-  width: 100px;
-  height: 100px;
-  line-height: 100px;
-  text-align: center;
-}
-
-.avatar {
-  width: 100px;
-  height: 100px;
-  display: block;
-}
-
-.cover-setting-container {
-  display: flex;
-}
-
-.cover-setting-title {
-  width: 80px;
-  text-align: right;
-  font-size: 14px;
-  padding-right: 12px;
-  box-sizing: border-box;
 }
 
 </style>
