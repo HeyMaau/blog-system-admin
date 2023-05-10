@@ -24,19 +24,13 @@
           stripe
           style="width: 100%">
         <el-table-column
-            min-width="15%"
+            min-width="25%"
             align="center"
             prop="content"
             label="内容">
         </el-table-column>
         <el-table-column
-            min-width="15%"
-            align="center"
-            prop="parentContent"
-            label="父内容">
-        </el-table-column>
-        <el-table-column
-            min-width="15%"
+            min-width="20%"
             align="center"
             prop="articleId"
             label="所属文章ID">
