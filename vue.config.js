@@ -1,7 +1,6 @@
 const {defineConfig} = require('@vue/cli-service')
 module.exports = defineConfig({
     transpileDependencies: true,
-    publicPath: './',
     configureWebpack: config => {
         if (process.env.NODE_ENV === 'production') {
             config.externals = [
@@ -18,9 +17,12 @@ module.exports = defineConfig({
                     callback();
                 }
             ]
-            config.entry = './src/main-prod.js'
-        } else {
-            config.entry = './src/main.js'
+        }
+    },
+    pages: {
+        index: {
+            entry: process.env.NODE_ENV === 'production' ? 'src/main-prod.js' : 'src/main.js',
+            title: '首页 - 卧卷'
         }
     }
 })
