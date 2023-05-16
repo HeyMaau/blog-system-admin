@@ -207,6 +207,9 @@ export default {
   },
   created() {
     this.getArticleList()
+  },
+  beforeMount() {
+    document.title = '文章列表 | 后台管理 - 卧卷'
   }
 }
 </script>

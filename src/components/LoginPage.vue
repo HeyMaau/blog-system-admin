@@ -122,6 +122,9 @@ export default {
 
     }
   },
+  beforeMount() {
+    document.title = '后台管理 - 卧卷'
+  },
   mounted() {
     this.getCaptcha()
   }

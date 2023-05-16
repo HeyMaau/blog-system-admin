@@ -208,6 +208,9 @@ export default {
     if (articleID.indexOf('add') === -1) {
       this.getArticle(articleID)
     }
+  },
+  beforeMount() {
+    document.title = '编辑文章 - 卧卷'
   }
 }
 </script>

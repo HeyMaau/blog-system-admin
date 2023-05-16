@@ -8,6 +8,7 @@ import CategoryList from "@/components/CategoryList";
 import CommentList from "@/components/CommentList";
 import ArticleList from "@/components/ArticleList";
 import EditArticle from "@/components/EditArticle";
+import HomePage from "@/components/HomePage";
 
 if (process.env.NODE_ENV !== 'production') {
     Vue.use(VueRouter)
@@ -16,6 +17,7 @@ if (process.env.NODE_ENV !== 'production') {
 const routes = [
     {
         path: '/', component: MainPage, children: [
+            {path: '', component: HomePage},
             {path: 'user', component: UserList},
             {path: 'category', component: CategoryList},
             {path: 'comment', component: CommentList},

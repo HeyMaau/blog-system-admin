@@ -300,6 +300,9 @@ export default {
   },
   created() {
     this.getCategoryList()
+  },
+  beforeMount() {
+    document.title = '分类列表 | 后台管理 - 卧卷'
   }
 }
 </script>

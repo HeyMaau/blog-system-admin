@@ -22,7 +22,7 @@ module.exports = defineConfig({
     pages: {
         index: {
             entry: process.env.NODE_ENV === 'production' ? 'src/main-prod.js' : 'src/main.js',
-            title: '首页 - 卧卷'
+            title: '后台管理 - 卧卷'
         }
     }
 })

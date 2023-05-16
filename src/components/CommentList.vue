@@ -202,6 +202,9 @@ export default {
   },
   created() {
     this.getCommentList()
+  },
+  beforeMount() {
+    document.title = '评论列表 | 后台管理 - 卧卷'
   }
 }
 </script>

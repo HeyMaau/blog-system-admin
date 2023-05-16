@@ -256,6 +256,9 @@ export default {
   ,
   created() {
     this.getUserList()
+  },
+  beforeMount() {
+    document.title = '用户管理 | 后台管理 - 卧卷'
   }
 }
 </script>
