@@ -115,6 +115,7 @@ export default {
           this.$router.push('/')
         } else {
           this.$message.error(response.message)
+          this.getCaptcha()
         }
       } catch (e) {
         this.$message.error("系统繁忙，请稍后再试")
