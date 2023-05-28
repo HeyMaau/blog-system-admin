@@ -82,8 +82,8 @@ export default {
     },
     //工具栏
     toolbar: {
-      type: [String, Array],
-      default: 'undo redo |  formatselect | bold italic | alignleft aligncenter alignright alignjustify | bullist numlist outdent indent table | codesample image media'
+      default: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
+        'fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat']
     },
     triggerChange: {
       type: Boolean,
