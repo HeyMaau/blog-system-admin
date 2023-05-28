@@ -83,7 +83,7 @@ export default {
     //工具栏
     toolbar: {
       default: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
-        'fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat']
+        'styleselect | fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat']
     },
     triggerChange: {
       type: Boolean,
@@ -114,6 +114,7 @@ export default {
         autoresize_bottom_margin: 20,
         placeholder: '正文内容',
         branding: true,//隐藏右下角技术支持
+        toolbar_sticky: true,
         //图片上传
         images_upload_handler: async (blobInfo, success, failure) => {
           if (blobInfo.blob().size / 1024 / 1024 > 2) {
