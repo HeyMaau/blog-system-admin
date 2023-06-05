@@ -80,11 +80,6 @@ export default {
       type: [String, Array],
       default: 'advlist autolink link image lists charmap media wordcount codesample table autoresize'
     },
-    //工具栏
-    toolbar: {
-      default: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
-        'styleselect | fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat']
-    },
     triggerChange: {
       type: Boolean,
       default: false,
@@ -106,7 +101,8 @@ export default {
         content_style: 'img {max-width:100%;}',//限制图片大小
         plugins: this.plugins,//插件
         //工具栏
-        toolbar: this.toolbar,
+        toolbar: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
+          'styleselect | fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat'],
         toolbar_location: '/',
         fontsize_formats: '12px 14px 16px 18px 20px 22px 24px 28px 32px 36px 48px 56px 72px',  //字体大小
         font_formats: fonts.join(";"),
