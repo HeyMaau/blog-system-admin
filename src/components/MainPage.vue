@@ -31,6 +31,16 @@ export default {
     return {
       publicPath: process.env.BASE_URL
     }
+  },
+  beforeRouteEnter(to, from, next) {
+    let token = sessionStorage.getItem('token');
+    if (token === undefined || token === null) {
+      next(vm => {
+        vm.$router.push('/login')
+      })
+      return
+    }
+    next()
   }
 }
 </script>
