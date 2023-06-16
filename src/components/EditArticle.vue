@@ -210,6 +210,7 @@ export default {
       }
     },
     async updateArticle(justSave) {
+      this.article.labels = this.dynamicTags.join('-')
       const {data: response} = await updateArticleApi(this.article)
       if (response.code === CODE_SUCCESS) {
         this.$message.success(response.message)
