@@ -119,7 +119,8 @@ export default {
             let formData = new FormData()
             // 服务端接收文件的参数名，文件数据，文件名
             formData.append('file', blobInfo.blob(), blobInfo.filename())
-            const {data: response} = await uploadImage(formData, TYPE_ARTICLE_IMAGE)
+            formData.append('type', TYPE_ARTICLE_IMAGE)
+            const {data: response} = await uploadImage(formData)
             if (response.code === CODE_SUCCESS) {
               const imageUrl = URL_IMAGE + response.data.image_id
               success(imageUrl)

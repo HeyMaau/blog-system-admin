@@ -23,10 +23,6 @@ request.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-export function uploadImage(data, type) {
-    return request.post('', data, {
-        params: {
-            type
-        }
-    })
+export function uploadImage(data) {
+    return request.post('', data)
 }

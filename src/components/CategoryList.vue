@@ -87,6 +87,7 @@
         <el-upload
             class="avatar-uploader"
             :headers="{'authorization': token}"
+            :data="{type: imageType, old: oldImageID}"
             :action="uploadCoverUrl"
             :show-file-list="false"
             :on-success="handleUploadCoverSuccess"
@@ -128,6 +129,7 @@
         <el-upload
             class="avatar-uploader"
             :headers="{'authorization': token}"
+            :data="{type: imageType, old: oldImageID}"
             :action="uploadCoverUrl"
             :show-file-list="false"
             :on-success="handleUploadCoverSuccess"
@@ -147,7 +149,7 @@
 
 <script>
 import {getCategoriesApi, recoverCategory, deleteCategory, updateCategory, addCategory} from "@/apis/category_api";
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE, TYPE_NORMAL_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 
 export default {
@@ -180,7 +182,9 @@ export default {
       },
       uploadCoverUrl: URL_IMAGE,
       coverUrl: '',
-      token: sessionStorage.getItem('token')
+      token: sessionStorage.getItem('token'),
+      imageType: TYPE_NORMAL_IMAGE,
+      oldImageID: ''
     }
   },
   methods: {
@@ -288,6 +292,7 @@ export default {
     },
     setCategoryCover(coverID) {
       this.coverUrl = URL_IMAGE + coverID
+      this.oldImageID = coverID
     },
     resetCategoryForm() {
       this.category.name = ''

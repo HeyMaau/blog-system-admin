@@ -104,6 +104,7 @@
         <el-upload
             class="avatar-uploader"
             :headers="{'authorization': token}"
+            :data="{type: imageType, old: oldImageID}"
             :action="uploadAvatarUrl"
             :show-file-list="false"
             :on-success="handleUploadAvatarSuccess"
@@ -123,7 +124,7 @@
 
 <script>
 import {getUsers, deleteUser, updateUserApi} from "@/apis/user_api";
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE, TYPE_NORMAL_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 
 export default {
@@ -167,7 +168,9 @@ export default {
         ]
       },
       uploadAvatarUrl: URL_IMAGE,
-      avatarUrl: ''
+      avatarUrl: '',
+      imageType: TYPE_NORMAL_IMAGE,
+      oldImageID: ''
     }
   },
   methods: {
@@ -241,6 +244,7 @@ export default {
     },
     setUserAvatar(avatarID) {
       this.avatarUrl = URL_IMAGE + avatarID
+      this.avatarUrl = avatarID
     },
     async updateUser() {
       const {data: response} = await updateUserApi(this.user)
