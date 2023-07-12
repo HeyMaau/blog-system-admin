@@ -1,6 +1,6 @@
 import axios from "axios";
 import router from "@/routers";
-import {Message} from "element-ui";
+import Vue from "vue";
 
 const request = axios.create({
     baseURL: process.env.VUE_APP_SERVER_PATH + '/admin/category/',
@@ -18,7 +18,7 @@ request.interceptors.response.use(function (response) {
 }, function (error) {
     if (error.response.status === 403) {
         router.push('/login')
-        Message.error('请重新登录')
+        Vue.prototype.$message.error('请重新登录')
     }
     return Promise.reject(error);
 });
