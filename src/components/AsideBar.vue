@@ -23,6 +23,14 @@
         <el-menu-item index="/category">分类列表</el-menu-item>
         <el-menu-item index="/comment">评论列表</el-menu-item>
       </el-submenu>
+      <el-submenu index="/thinking">
+        <template slot="title">
+          <i class="el-icon-notebook-2"></i>
+          <span>想法管理</span>
+        </template>
+        <el-menu-item index="/thinking">想法列表</el-menu-item>
+        <el-menu-item index="/thinking/comment">评论列表</el-menu-item>
+      </el-submenu>
     </el-menu>
   </div>
 </template>

@@ -9,6 +9,8 @@ import CommentList from "@/components/CommentList";
 import ArticleList from "@/components/ArticleList";
 import EditArticle from "@/components/EditArticle";
 import HomePage from "@/components/HomePage";
+import ThinkingPage from "@/components/pages/ThinkingPage";
+import ThinkingCommentPage from "@/components/pages/ThinkingCommentPage";
 
 if (process.env.NODE_ENV !== 'production') {
     Vue.use(VueRouter)
@@ -21,7 +23,9 @@ const routes = [
             {path: 'user', component: UserList},
             {path: 'category', component: CategoryList},
             {path: 'comment', component: CommentList},
-            {path: 'article', component: ArticleList}
+            {path: 'article', component: ArticleList},
+            {path: 'thinking', component: ThinkingPage},
+            {path: 'thinking/comment', component: ThinkingCommentPage}
         ]
     },
     {path: '/login', component: LoginPage},
