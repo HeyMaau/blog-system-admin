@@ -21,7 +21,7 @@
         </template>
         <el-menu-item index="/article">文章列表</el-menu-item>
         <el-menu-item index="/category">分类列表</el-menu-item>
-        <el-menu-item index="/comment">评论列表</el-menu-item>
+        <el-menu-item index="/article/comment">评论列表</el-menu-item>
       </el-submenu>
       <el-submenu index="/thinking">
         <template slot="title">

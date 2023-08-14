@@ -23,12 +23,13 @@ request.interceptors.response.use(function (response) {
     return Promise.reject(error);
 });
 
-export function getComments(page, size, state) {
+export function getCommentsApi(page, size, state, type) {
     return request.get('list', {
         params: {
             page,
             size,
-            state
+            state,
+            type
         }
     })
 }

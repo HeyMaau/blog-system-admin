@@ -5,7 +5,7 @@ import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
 import UserList from "@/components/UserList";
 import CategoryList from "@/components/CategoryList";
-import CommentList from "@/components/CommentList";
+import ArticleCommentPage from "@/components/pages/ArticleCommentPage";
 import ArticleList from "@/components/ArticleList";
 import EditArticle from "@/components/EditArticle";
 import HomePage from "@/components/HomePage";
@@ -22,7 +22,7 @@ const routes = [
             {path: '', component: HomePage},
             {path: 'user', component: UserList},
             {path: 'category', component: CategoryList},
-            {path: 'comment', component: CommentList},
+            {path: 'article/comment', component: ArticleCommentPage},
             {path: 'article', component: ArticleList},
             {path: 'thinking', component: ThinkingPage},
             {path: 'thinking/comment', component: ThinkingCommentPage}
