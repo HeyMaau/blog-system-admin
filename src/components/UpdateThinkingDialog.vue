@@ -30,7 +30,6 @@
     <el-dialog :visible.sync="uploadPicDialogVisibility" title="上传图片" :close-on-click-modal="false"
                :close-on-press-escape="false"
                destroy-on-close
-               @closed="handleUploadPictureDialogClose"
                class="dialog-container upload-picture-dialog">
       <el-upload
           :action="uploadPictureUrl"
