@@ -244,7 +244,6 @@ export default {
     },
     setUserAvatar(avatarID) {
       this.avatarUrl = URL_IMAGE + avatarID
-      this.avatarUrl = avatarID
     },
     async updateUser() {
       const {data: response} = await updateUserApi(this.user)
