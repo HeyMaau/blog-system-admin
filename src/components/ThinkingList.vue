@@ -122,6 +122,7 @@ export default {
       const {data: response} = await getThinkingListApi(this.currentPage, this.currentSize, this.searchInput, this.searchState)
       if (response.code === CODE_SUCCESS) {
         this.thinkingList = response.data.data
+        this.total = response.data.total
       }
     },
     handleSizeChange(size) {
