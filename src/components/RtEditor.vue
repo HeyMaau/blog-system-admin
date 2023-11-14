@@ -13,22 +13,22 @@
 <script>
 // import axios from "axios";
 import tinymce from 'tinymce/tinymce' //tinymce默认hidden，不引入不显示
-import Editor from '@tinymce/tinymce-vue'//编辑器引入
-import 'tinymce/themes/silver/theme'//编辑器主题
-import 'tinymce/icons/default'  //引入编辑器图标icon，不引入则不显示对应图标
+import Editor from '@tinymce/tinymce-vue' //编辑器引入
+import 'tinymce/themes/silver/theme' //编辑器主题
+import 'tinymce/icons/default' //引入编辑器图标icon，不引入则不显示对应图标
 // 引入编辑器插件（基本免费插件都在这儿了）
-import 'tinymce/plugins/advlist'  //高级列表
-import 'tinymce/plugins/autolink'  //自动链接
-import 'tinymce/plugins/link'  //超链接
-import 'tinymce/plugins/image'  //插入编辑图片
+import 'tinymce/plugins/advlist' //高级列表
+import 'tinymce/plugins/autolink' //自动链接
+import 'tinymce/plugins/link' //超链接
+import 'tinymce/plugins/image' //插入编辑图片
 import 'tinymce/plugins/lists' //列表插件
-import 'tinymce/plugins/charmap'  //特殊字符
+import 'tinymce/plugins/charmap' //特殊字符
 import 'tinymce/plugins/media' //插入编辑媒体
-import 'tinymce/plugins/wordcount'// 字数统计
-import 'tinymce/plugins/codesample'// 代码块
-import 'tinymce/plugins/table'// 表格
-import 'tinymce/plugins/autoresize'// 自适应尺寸
-import {uploadImage} from "@/apis/image_api";
+import 'tinymce/plugins/wordcount' // 字数统计
+import 'tinymce/plugins/codesample' // 代码块
+import 'tinymce/plugins/table' // 表格
+import 'tinymce/plugins/autoresize' // 自适应尺寸
+import {uploadImageWithWatermark} from "@/apis/image_api";
 import {CODE_SUCCESS, TYPE_ARTICLE_IMAGE, URL_IMAGE} from "@/utils/constants";
 
 const fonts = [
@@ -120,7 +120,7 @@ export default {
             // 服务端接收文件的参数名，文件数据，文件名
             formData.append('file', blobInfo.blob(), blobInfo.filename())
             formData.append('type', TYPE_ARTICLE_IMAGE)
-            const {data: response} = await uploadImage(formData)
+            const {data: response} = await uploadImageWithWatermark(formData)
             if (response.code === CODE_SUCCESS) {
               const imageUrl = URL_IMAGE + response.data.image_id
               success(imageUrl)

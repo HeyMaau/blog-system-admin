@@ -65,7 +65,7 @@ export default {
   },
   data() {
     return {
-      uploadPictureUrl: URL_IMAGE,
+      uploadPictureUrl: URL_IMAGE + 'watermark',
       token: sessionStorage.getItem('token'),
       editDialogVisibility: false,
       uploadPicDialogVisibility: false,
