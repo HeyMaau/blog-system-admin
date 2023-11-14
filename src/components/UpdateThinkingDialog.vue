@@ -89,6 +89,7 @@ export default {
       this.thinking = deepClone(newValue)
       this.pictureFileList = []
       this.pictureList = []
+      this.tempPictureList = []
       if (newValue.images !== undefined && newValue.images.length !== 0) {
         this.pictureList = newValue.images.split('-')
         this.pictureList.forEach(value => {
