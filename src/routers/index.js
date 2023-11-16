@@ -4,7 +4,7 @@ import Vue from "vue";
 import MainPage from "@/components/MainPage";
 import LoginPage from "@/components/LoginPage";
 import UserList from "@/components/UserList";
-import CategoryList from "@/components/CategoryList";
+import CategoryPage from "@/components/pages/CategoryPage.vue";
 import ArticleCommentPage from "@/components/pages/ArticleCommentPage";
 import ArticleList from "@/components/ArticleList";
 import EditArticle from "@/components/EditArticle";
@@ -21,7 +21,7 @@ const routes = [
         path: '/', component: MainPage, children: [
             {path: '', component: HomePage},
             {path: 'user', component: UserList},
-            {path: 'category', component: CategoryList},
+            {path: 'category', component: CategoryPage},
             {path: 'article/comment', component: ArticleCommentPage},
             {path: 'article', component: ArticleList},
             {path: 'thinking', component: ThinkingPage},

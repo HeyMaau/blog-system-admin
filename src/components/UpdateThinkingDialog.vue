@@ -135,7 +135,6 @@ export default {
     },
     // eslint-disable-next-line no-unused-vars
     handlePictureRemove(file, fileList) {
-      console.log(file)
       if (file.response !== undefined) {
         let index = this.tempPictureList.indexOf(file.response.data.image_id);
         this.tempPictureList.splice(index, 1)
