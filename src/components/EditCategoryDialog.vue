@@ -16,7 +16,8 @@ export default {
       currentCategory: {
         name: '',
         description: '',
-        cover: ''
+        cover: '',
+        tagColor: '#3ddc84'
       },
       token: sessionStorage.getItem('token'),
       uploadCoverUrl: URL_IMAGE,
@@ -87,6 +88,9 @@ export default {
       handler(newValue) {
         this.currentCategory = newValue
         this.coverUrl = this.currentCategory.cover.trim().length === 0 ? '' : URL_IMAGE + this.currentCategory.cover
+        if (this.currentCategory.tagColor === null || this.currentCategory.tagColor.length === 0) {
+          this.currentCategory.tagColor = '#3ddc84'
+        }
       },
       deep: true
     }
@@ -121,6 +125,10 @@ export default {
         <i v-else class="el-icon-plus avatar-uploader-icon"></i>
       </el-upload>
     </div>
+    <div class="tag-color-container">
+      <span class="cover-setting-title">标签颜色</span>
+      <el-color-picker v-model="currentCategory.tagColor"></el-color-picker>
+    </div>
     <span slot="footer" class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="confirm">确 定</el-button>
@@ -137,6 +145,11 @@ export default {
 
 ::v-deep .el-dialog__body {
   text-align: left;
+}
+
+.tag-color-container {
+  display: flex;
+  align-items: center;
 }
 
 </style>

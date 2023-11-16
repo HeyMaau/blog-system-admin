@@ -85,7 +85,8 @@ export default {
       category: {
         name: '',
         description: '',
-        cover: ''
+        cover: '',
+        tagColor: ''
       },
       editCategoryDialogType: 'add'
     }
@@ -156,6 +157,7 @@ export default {
       this.category.name = ''
       this.category.description = ''
       this.category.cover = ''
+      this.category.tagColor = ''
       this.coverUrl = ''
     },
     handleSuccess() {

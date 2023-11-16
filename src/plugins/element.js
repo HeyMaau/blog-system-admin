@@ -28,7 +28,8 @@ import {
     Dialog,
     Tag,
     Upload,
-    Divider
+    Divider,
+    ColorPicker
 } from 'element-ui';
 
 Vue.component(Container.name, Container);
@@ -58,5 +59,6 @@ Vue.component(Dialog.name, Dialog);
 Vue.component(Tag.name, Tag);
 Vue.component(Upload.name, Upload);
 Vue.component(Divider.name, Divider);
+Vue.component(ColorPicker.name, ColorPicker);
 Vue.prototype.$message = Message
 Vue.prototype.$confirm = MessageBox.confirm

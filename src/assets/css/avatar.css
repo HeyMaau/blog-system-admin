@@ -27,6 +27,7 @@
 
 .cover-setting-container {
     display: flex;
+    margin-bottom: 22px;
 }
 
 .cover-setting-title {
