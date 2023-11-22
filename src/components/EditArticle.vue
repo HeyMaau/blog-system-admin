@@ -30,7 +30,6 @@
           <el-col :span="8">
             <el-upload
                 :headers="{'authorization': token}"
-                :data="{type: imageType, old: oldImageID}"
                 accept=".jpg,.jpeg,.png"
                 class="avatar-uploader"
                 :action="uploadImagePath"
@@ -92,7 +91,7 @@
 <script>
 import RtEditor from "@/components/RtEditor";
 import {getCategoriesApi} from "@/apis/category_api";
-import {CODE_SUCCESS, URL_IMAGE, TYPE_NORMAL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
@@ -121,9 +120,7 @@ export default {
       categoryList: [],
       uploadImagePath: URL_IMAGE,
       token: sessionStorage.getItem('token'),
-      observer: null,
-      imageType: TYPE_NORMAL_IMAGE,
-      oldImageID: ''
+      observer: null
     }
   },
   methods: {

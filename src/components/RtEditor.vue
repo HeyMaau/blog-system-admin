@@ -29,7 +29,7 @@ import 'tinymce/plugins/codesample' // 代码块
 import 'tinymce/plugins/table' // 表格
 import 'tinymce/plugins/autoresize' // 自适应尺寸
 import {uploadImageWithWatermark} from "@/apis/image_api";
-import {CODE_SUCCESS, TYPE_ARTICLE_IMAGE, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 
 const fonts = [
   "宋体=宋体",
@@ -119,7 +119,6 @@ export default {
             let formData = new FormData()
             // 服务端接收文件的参数名，文件数据，文件名
             formData.append('file', blobInfo.blob(), blobInfo.filename())
-            formData.append('type', TYPE_ARTICLE_IMAGE)
             const {data: response} = await uploadImageWithWatermark(formData)
             if (response.code === CODE_SUCCESS) {
               const imageUrl = URL_IMAGE + response.data.image_id
