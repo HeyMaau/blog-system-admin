@@ -81,15 +81,15 @@
       </div>
     </div>
     <div id="operation-container">
-      <el-button type="primary" @click="addArticle('2', false)" v-if="articleState !== '2'">发布文章</el-button>
-      <el-button type="info" @click="addArticle('1', false)" v-if="articleState !== '2'">保存文章</el-button>
-      <el-button type="primary" @click="updateArticle(false)" v-if="articleState === '2'">修改文章</el-button>
+      <el-button size="large" type="primary" @click="addArticle('2', false)" v-if="articleState !== '2'">发布文章</el-button>
+      <el-button size="large" type="info" @click="addArticle('1', false)" v-if="articleState !== '2'">保存文章</el-button>
+      <el-button size="large" type="primary" @click="updateArticle(false)" v-if="articleState === '2'">修改文章</el-button>
     </div>
   </div>
 </template>
 
 <script>
-import RtEditor from "@/components/RtEditor";
+import RtEditor from "@/components/RtEditor.vue";
 import {getCategoriesApi} from "@/apis/category_api";
 import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
@@ -295,7 +295,7 @@ export default {
   font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", "微软雅黑", Arial, sans-serif;
 }
 
-::v-deep .tox-tinymce {
+:deep( .tox-tinymce) {
   border-radius: 5px;
 }
 
@@ -319,7 +319,7 @@ export default {
   margin-left: 20px;
 }
 
-::v-deep .avatar-uploader .el-upload {
+:deep( .avatar-uploader .el-upload) {
   border: 1px dashed #d9d9d9;
   border-radius: 6px;
   cursor: pointer;
@@ -327,7 +327,7 @@ export default {
   overflow: hidden;
 }
 
-::v-deep .avatar-uploader .el-upload:hover {
+:deep( .avatar-uploader .el-upload:hover) {
   border-color: #409EFF;
 }
 

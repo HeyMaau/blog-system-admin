@@ -10,7 +10,7 @@
 </template>
 
 <script>
-import CommentList from "@/components/CommentList";
+import CommentList from "@/components/pages/CommentPage.vue";
 
 export default {
   name: "ArticleCommentPage",

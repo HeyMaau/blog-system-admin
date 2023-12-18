@@ -66,7 +66,7 @@ export default {
   },
   props: {
     //内容
-    value: {
+    modelValue: {
       type: String,
       default: ''
     },
@@ -145,14 +145,14 @@ export default {
   },
   watch: {
     //监听内容变化
-    value(newValue) {
+    modelValue(newValue) {
       this.myValue = (newValue == null ? '' : newValue)
     },
     myValue(newValue) {
       if (this.triggerChange) {
         this.$emit('change', newValue)
       } else {
-        this.$emit('input', newValue)
+        this.$emit('update:modelValue', newValue)
       }
     }
   },

@@ -54,7 +54,7 @@
     </div>
     <el-card class="login-card">
       <div class="login-form-title">管理登录</div>
-      <el-form ref="loginFormRef" :model="loginForm" class="login-form" :rules="rules">
+      <el-form ref="loginFormRef" :model="loginForm" class="login-form" :rules="rules" size="large">
         <el-form-item prop="userName">
           <el-input v-model="loginForm.userName" placeholder="用户名"></el-input>
         </el-form-item>
@@ -69,13 +69,13 @@
                @click="getCaptcha" class="captcha-img"/>
         </div>
       </el-form>
-      <el-button type="primary" class="login-button" @click="doLogin">登录</el-button>
+      <el-button type="primary" class="login-button" @click="doLogin" size="large">登录</el-button>
     </el-card>
   </div>
 </template>
 
 <script>
-import {login} from "../apis/user_api"
+import {login} from "../../apis/user_api"
 
 export default {
   name: "LoginPage",
@@ -152,7 +152,7 @@ export default {
   transform: translate(-50%, -50%);
 }
 
-::v-deep .el-card__body {
+:deep( .el-card__body) {
   padding: 40px;
   display: flex;
   flex-direction: column;

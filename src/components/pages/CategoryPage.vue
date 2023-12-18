@@ -28,9 +28,13 @@
             align="center"
             prop="state"
             label="状态">
-          <template slot-scope="scope">
-            <i v-if="scope.row.state === '1'" class="el-icon-success"></i>
-            <i v-else class="el-icon-error"></i>
+          <template #default="scope">
+            <el-icon v-if="scope.row.state === '1'" :size="20" color="#32CD32">
+              <CircleCheckFilled/>
+            </el-icon>
+            <el-icon v-else :size="20" color="#DC143C">
+              <CircleCloseFilled/>
+            </el-icon>
           </template>
         </el-table-column>
         <el-table-column
@@ -41,27 +45,30 @@
         <el-table-column
             align="center"
             label="操作">
-          <template slot-scope="scope">
-            <el-button v-if="scope.row.state === '1'" type="danger" icon="el-icon-delete" size="mini"
+          <template #default="scope">
+            <el-button v-if="scope.row.state === '1'" type="danger" :icon="Delete" size="small"
                        @click="deleteCategory(scope.row.id)"></el-button>
-            <el-button v-else type="success" icon="el-icon-refresh-left" size="mini"
+            <el-button v-else type="success" :icon="RefreshLeft" size="small"
                        @click="recoverCategory(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state === '1'" type="info" icon="el-icon-setting" size="mini"
+            <el-button v-if="scope.row.state === '1'" type="info" :icon="Setting" size="small"
                        @click="showUpdateCategoryDialog(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="currentSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
+      <el-config-provider :locale="zhCn">
+        <el-pagination
+            class="list-pagination"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            v-model:current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            v-model:page-size="currentSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+      </el-config-provider>
     </el-card>
-    <EditCategoryDialog :category="category" :type="editCategoryDialogType" :visibility.sync="editCategoryDialogVisible"
+    <EditCategoryDialog :category="category" :type="editCategoryDialogType" v-model:visibility="editCategoryDialogVisible"
                         @onSuccess="handleSuccess" @onCancel="handleCancel"/>
   </div>
 </template>
@@ -71,9 +78,25 @@ import {deleteCategory, getCategoriesApi, recoverCategory} from "@/apis/category
 import {CODE_SUCCESS} from "@/utils/constants";
 import EditCategoryDialog from "@/components/EditCategoryDialog.vue";
 import {deepClone} from "@/utils/clone-util";
+import {Delete, RefreshLeft, Setting} from "@element-plus/icons-vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
   name: "CategoryPage",
+  computed: {
+    zhCn() {
+      return zhCn
+    },
+    Setting() {
+      return Setting
+    },
+    RefreshLeft() {
+      return RefreshLeft
+    },
+    Delete() {
+      return Delete
+    }
+  },
   components: {EditCategoryDialog},
   data() {
     return {
@@ -177,6 +200,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/pagination.css" scoped/>
 <style scoped>
 
 .add-category-button {

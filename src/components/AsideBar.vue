@@ -7,30 +7,38 @@
         text-color="#fff"
         active-text-color="#f0c800">
       <el-menu-item index="/">
-        <i class="el-icon-pie-chart"></i>
-        <span slot="title">首页</span>
+        <el-icon>
+          <PieChart/>
+        </el-icon>
+        <span>首页</span>
       </el-menu-item>
       <el-menu-item index="/user">
-        <i class="el-icon-user"></i>
-        <span slot="title">用户管理</span>
+        <el-icon>
+          <User/>
+        </el-icon>
+        <span>用户管理</span>
       </el-menu-item>
-      <el-submenu index="/article">
-        <template slot="title">
-          <i class="el-icon-notebook-2"></i>
+      <el-sub-menu index="/article">
+        <template #title>
+          <el-icon>
+            <Memo/>
+          </el-icon>
           <span>文章管理</span>
         </template>
         <el-menu-item index="/article">文章列表</el-menu-item>
         <el-menu-item index="/category">分类列表</el-menu-item>
         <el-menu-item index="/article/comment">评论列表</el-menu-item>
-      </el-submenu>
-      <el-submenu index="/thinking">
-        <template slot="title">
-          <i class="el-icon-notebook-2"></i>
+      </el-sub-menu>
+      <el-sub-menu index="/thinking">
+        <template #title>
+          <el-icon>
+            <ChatLineSquare/>
+          </el-icon>
           <span>想法管理</span>
         </template>
         <el-menu-item index="/thinking">想法列表</el-menu-item>
         <el-menu-item index="/thinking/comment">评论列表</el-menu-item>
-      </el-submenu>
+      </el-sub-menu>
     </el-menu>
   </div>
 </template>

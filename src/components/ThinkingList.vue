@@ -6,7 +6,7 @@
           <el-input
               clearable
               placeholder="请输入想法关键字"
-              prefix-icon="el-icon-search"
+              :prefix-icon="Search"
               @change="getThinkingList"
               v-model="searchInput">
           </el-input>
@@ -48,7 +48,7 @@
             align="center"
             min-width="10%"
             label="状态">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-tag v-if="scope.row.state === '0'" type="danger">删除</el-tag>
             <el-tag v-else type="success">发布</el-tag>
           </template>
@@ -63,23 +63,26 @@
             align="center"
             min-width="20%"
             label="操作">
-          <template slot-scope="scope">
-            <el-button v-if="scope.row.state !== '0'" type="danger" icon="el-icon-delete" size="mini"
+          <template #default="scope">
+            <el-button v-if="scope.row.state !== '0'" type="danger" :icon="Delete" size="small"
                        @click="deleteArticle(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state !== '0'" type="info" icon="el-icon-edit" size="mini"
+            <el-button v-if="scope.row.state !== '0'" type="info" :icon="Edit" size="small"
                        @click="updateThinking(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="currentSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
+      <el-config-provider :locale="zhCn">
+        <el-pagination
+            class="list-pagination"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            v-model:current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            v-model::page-size="currentSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+      </el-config-provider>
     </el-card>
     <UpdateThinkingDialog v-show="updateThinkingDialogVisibility" :visibility.sync="updateThinkingDialogVisibility"
                           @onVisibilityChange="handleDialogVisibilityChange"
@@ -93,9 +96,25 @@ import {CODE_SUCCESS} from "@/utils/constants";
 import {deleteArticleApi, topArticleApi} from "@/apis/article_api";
 import {getThinkingListApi} from "@/apis/thinking_api";
 import UpdateThinkingDialog from "@/components/UpdateThinkingDialog";
+import {Delete, Edit, Search} from "@element-plus/icons-vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
   name: "ThinkingList",
+  computed: {
+    Search() {
+      return Search
+    },
+    zhCn() {
+      return zhCn
+    },
+    Edit() {
+      return Edit
+    },
+    Delete() {
+      return Delete
+    }
+  },
   components: {UpdateThinkingDialog},
   data() {
     return {
@@ -189,6 +208,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/pagination.css" scoped/>
 <style scoped>
 
 .search-bar {

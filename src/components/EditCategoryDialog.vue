@@ -101,7 +101,9 @@ export default {
 <template>
   <el-dialog
       :title="type.toLowerCase() === 'add' ? '添加分类' : '修改分类'"
-      :visible.sync="dialogVisibility"
+      v-model="dialogVisibility"
+      :close-on-click-modal="false"
+      :close-on-press-escape="false"
       width="50%">
     <el-form ref="addCategoryFormRef" :model="currentCategory" label-width="80px" :rules="rules">
       <el-form-item label="分类名称" prop="name">
@@ -122,7 +124,9 @@ export default {
           :on-error="handleUploadCoverError"
           :before-upload="beforeCoverUpload">
         <img v-if="coverUrl" :src="coverUrl" class="avatar">
-        <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+        <el-icon v-else class="el-icon-plus avatar-uploader-icon">
+          <Plus/>
+        </el-icon>
       </el-upload>
     </div>
     <div class="tag-color-container">
@@ -139,11 +143,11 @@ export default {
 <style src="@/assets/css/avatar.css" scoped></style>
 <style scoped>
 
-::v-deep .el-dialog__header {
+:deep( .el-dialog__header) {
   text-align: left;
 }
 
-::v-deep .el-dialog__body {
+:deep( .el-dialog__body) {
   text-align: left;
 }
 

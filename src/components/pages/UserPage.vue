@@ -11,7 +11,7 @@
               clearable
               @change="getUserList"
               placeholder="请输入用户名或邮箱地址"
-              prefix-icon="el-icon-search"
+              :prefix-icon="Search"
               v-model="searchInput">
           </el-input>
         </el-col>
@@ -54,7 +54,7 @@
             min-width="10%"
             prop="state"
             label="状态">
-          <template slot-scope="scope">
+          <template #default="scope">
             <i v-if="scope.row.state == 1" class="el-icon-success"></i>
             <i v-else class="el-icon-error"></i>
           </template>
@@ -63,27 +63,30 @@
             align="center"
             min-width="20%"
             label="操作">
-          <template slot-scope="scope">
-            <el-button v-if="scope.row.state === '1'" type="danger" icon="el-icon-delete" size="mini"
+          <template #default="scope">
+            <el-button v-if="scope.row.state === '1'" type="danger" :icon="Delete" size="small"
                        @click="deleteUser(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state === '1'" type="info" icon="el-icon-setting" size="mini"
+            <el-button v-if="scope.row.state === '1'" type="info" :icon="Setting" size="small"
                        @click="showUpdateUserDialog(scope.row)"></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="size"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
+      <el-config-provider :locale="zhCn">
+        <el-pagination
+            class="list-pagination"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            :current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            :page-size="size"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+      </el-config-provider>
     </el-card>
     <el-dialog
         title="修改用户信息"
-        :visible.sync="updateUserDialogVisible"
+        v-model="updateUserDialogVisible"
         width="50%">
       <el-form ref="updateCategoryFormRef" :model="user" label-width="80px" :rules="rules">
         <el-form-item label="用户名" prop="userName">
@@ -110,7 +113,9 @@
             :on-error="handleUploadAvatarError"
             :before-upload="beforeAvatarUpload">
           <img v-if="avatarUrl" :src="avatarUrl" class="avatar">
-          <i v-else class="el-icon-plus avatar-uploader-icon"></i>
+          <el-icon v-else class="el-icon-plus avatar-uploader-icon">
+            <Plus/>
+          </el-icon>
         </el-upload>
       </div>
       <span slot="footer" class="dialog-footer">
@@ -125,9 +130,25 @@
 import {deleteUser, getUsers, updateUserApi} from "@/apis/user_api";
 import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
+import {Delete, Search, Setting} from "@element-plus/icons-vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
   name: "UserList",
+  computed: {
+    Search() {
+      return Search
+    },
+    zhCn() {
+      return zhCn
+    },
+    Setting() {
+      return Setting
+    },
+    Delete() {
+      return Delete
+    }
+  },
   data() {
     return {
       currentPage: 1,
@@ -264,6 +285,7 @@ export default {
 </script>
 
 <style src="@/assets/css/avatar.css" scoped></style>
+<style src="@/assets/css/pagination.css" scoped/>
 <style scoped>
 
 .search-bar {

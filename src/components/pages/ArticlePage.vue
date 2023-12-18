@@ -12,7 +12,7 @@
               clearable
               @change="getArticleList"
               placeholder="请输入文章关键字"
-              prefix-icon="el-icon-search"
+              :prefix-icon="Search"
               v-model="searchInput">
           </el-input>
         </el-col>
@@ -39,7 +39,7 @@
             align="center"
             min-width="16%"
             label="标题">
-          <template slot-scope="scope">
+          <template #default="scope">
             <router-link :to="{ name: 'editArticle', params: { id: scope.row.id }}">{{ scope.row.title }}</router-link>
           </template>
         </el-table-column>
@@ -47,7 +47,7 @@
             align="center"
             min-width="12%"
             label="标签">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-tag id="label-tag" v-for="(item, index) in scope.row.labels" :key="index">{{ item }}</el-tag>
           </template>
         </el-table-column>
@@ -68,7 +68,7 @@
             min-width="9%"
             prop="type"
             label="类型">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-tag v-if="scope.row.type === '0'">富文本</el-tag>
             <el-tag v-else>Markdown</el-tag>
           </template>
@@ -77,7 +77,7 @@
             align="center"
             min-width="10%"
             label="状态">
-          <template slot-scope="scope">
+          <template #default="scope">
             <el-tag v-if="scope.row.state === '0'" type="danger">删除</el-tag>
             <el-tag v-else-if="scope.row.state === '1'" type="info">草稿</el-tag>
             <el-tag v-else-if="scope.row.state === '2'" type="success">发布</el-tag>
@@ -94,25 +94,28 @@
             align="center"
             min-width="15%"
             label="操作">
-          <template slot-scope="scope">
-            <el-button v-if="scope.row.state !== '0'" type="danger" icon="el-icon-delete" size="mini"
+          <template #default="scope">
+            <el-button v-if="scope.row.state !== '0'" type="danger" :icon="Delete" size="small"
                        @click="deleteArticle(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state === '2'" type="warning" icon="el-icon-top" size="mini"
+            <el-button v-if="scope.row.state === '2'" type="warning" :icon="Top" size="small"
                        @click="topArticle(scope.row.id)"></el-button>
-            <el-button v-if="scope.row.state === '3'" type="info" icon="el-icon-bottom" size="mini"
+            <el-button v-if="scope.row.state === '3'" type="info" :icon="Bottom" size="small"
                        @click="topArticle(scope.row.id)"></el-button>
           </template>
         </el-table-column>
       </el-table>
-      <el-pagination
-          @size-change="handleSizeChange"
-          @current-change="handleCurrentChange"
-          :current-page="currentPage"
-          :page-sizes="[5, 10, 15, 20]"
-          :page-size="currentSize"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="total">
-      </el-pagination>
+      <el-config-provider :locale="zhCn">
+        <el-pagination
+            class="list-pagination"
+            @size-change="handleSizeChange"
+            @current-change="handleCurrentChange"
+            v-model:current-page="currentPage"
+            :page-sizes="[5, 10, 15, 20]"
+            v-model:page-size="currentSize"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="total">
+        </el-pagination>
+      </el-config-provider>
     </el-card>
   </div>
 </template>
@@ -120,9 +123,28 @@
 <script>
 import {CODE_SUCCESS} from "@/utils/constants";
 import {getArticles, deleteArticleApi, topArticleApi} from "@/apis/article_api";
+import {Bottom, Delete, Search, Top} from "@element-plus/icons-vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
-  name: "ArticleList",
+  name: "ArticlePage",
+  computed: {
+    Search() {
+      return Search
+    },
+    zhCn() {
+      return zhCn
+    },
+    Bottom() {
+      return Bottom
+    },
+    Top() {
+      return Top
+    },
+    Delete() {
+      return Delete
+    }
+  },
   data() {
     return {
       currentPage: 1,
@@ -214,6 +236,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/pagination.css" scoped/>
 <style scoped>
 
 .search-bar {

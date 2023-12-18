@@ -46,7 +46,7 @@
           align="center"
           prop="state"
           label="状态">
-        <template slot-scope="scope">
+        <template #default="scope">
           <i v-if="scope.row.state != 0" class="el-icon-success"></i>
           <i v-else class="el-icon-error"></i>
         </template>
@@ -55,36 +55,58 @@
           align="center"
           min-width="15%"
           label="操作">
-        <template slot-scope="scope">
-          <el-button v-if="scope.row.state !== '0'" type="danger" icon="el-icon-delete" size="mini"
+        <template #default="scope">
+          <el-button v-if="scope.row.state !== '0'" type="danger" :icon="Delete" size="small"
                      @click="deleteComment(scope.row.id)"></el-button>
-          <el-button v-if="scope.row.state === '1'" type="warning" icon="el-icon-top" size="mini"
+          <el-button v-if="scope.row.state === '1'" type="warning" :icon="Top" size="small"
                      @click="topComment(scope.row.id)"></el-button>
-          <el-button v-if="scope.row.state === '2'" type="info" icon="el-icon-bottom" size="mini"
+          <el-button v-if="scope.row.state === '2'" type="info" :icon="Bottom" size="small"
                      @click="topComment(scope.row.id)"></el-button>
-          <el-button v-if="scope.row.state === '0'" type="success" icon="el-icon-refresh-left" size="mini"
+          <el-button v-if="scope.row.state === '0'" type="success" :icon="RefreshLeft" size="small"
                      @click="recoverComment(scope.row.id)"></el-button>
         </template>
       </el-table-column>
     </el-table>
-    <el-pagination
-        @size-change="handleSizeChange"
-        @current-change="handleCurrentChange"
-        :current-page="currentPage"
-        :page-sizes="[5, 10, 15, 20]"
-        :page-size="currentSize"
-        layout="total, sizes, prev, pager, next, jumper"
-        :total="total">
-    </el-pagination>
+    <el-config-provider :locale="zhCn">
+      <el-pagination
+          class="list-pagination"
+          @size-change="handleSizeChange"
+          @current-change="handleCurrentChange"
+          v-model:current-page="currentPage"
+          :page-sizes="[5, 10, 15, 20]"
+          v-model:page-size="currentSize"
+          layout="total, sizes, prev, pager, next, jumper"
+          :total="total">
+      </el-pagination>
+    </el-config-provider>
   </el-card>
 </template>
 
 <script>
 import {deleteCommentByState, getCommentsApi, recoverComment, topComment} from "@/apis/comment_api";
 import {CODE_SUCCESS} from "@/utils/constants";
+import {Bottom, Delete, RefreshLeft, Top} from "@element-plus/icons-vue";
+import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
   name: "CommentListComp",
+  computed: {
+    zhCn() {
+      return zhCn
+    },
+    RefreshLeft() {
+      return RefreshLeft
+    },
+    Bottom() {
+      return Bottom
+    },
+    Top() {
+      return Top
+    },
+    Delete() {
+      return Delete
+    }
+  },
   props: {
     type: String
   },
@@ -175,6 +197,7 @@ export default {
 }
 </script>
 
+<style src="@/assets/css/pagination.css" scoped/>
 <style scoped>
 
 .search-bar {

@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-dialog :visible.sync="editDialogVisibility" :close-on-click-modal="false" :close-on-press-escape="false"
+    <el-dialog v-model="editDialogVisibility" :close-on-click-modal="false" :close-on-press-escape="false"
                @open="handleOpenEditDialog"
                @close="handleCloseEditDialog"
                class="dialog-container add-thinking-dialog">
@@ -19,7 +19,9 @@
       </div>
       <div slot="footer" class="dialog-footer">
         <div class="dialog-footer-button-container">
-          <i class="el-icon-picture-outline upload-picture-button" @click="openUploadPictureDialog"></i>
+          <el-icon :size="25" @click="openUploadPictureDialog">
+            <Picture/>
+          </el-icon>
           <el-button type="primary" :disabled="addButtonAble" @click="updateThinking" class="add-button">
             发布
           </el-button>
@@ -27,7 +29,7 @@
       </div>
     </el-dialog>
     <!--上传图片弹窗-->
-    <el-dialog :visible.sync="uploadPicDialogVisibility" title="上传图片" :close-on-click-modal="false"
+    <el-dialog v-model="uploadPicDialogVisibility" title="上传图片" :close-on-click-modal="false"
                :close-on-press-escape="false"
                destroy-on-close
                class="dialog-container upload-picture-dialog">
@@ -40,7 +42,9 @@
           :on-success="handlePictureUploadSuccess"
           :on-error="handlePictureUploadError"
           :on-remove="handlePictureRemove">
-        <i class="el-icon-plus"></i>
+        <el-icon>
+          <Plus/>
+        </el-icon>
       </el-upload>
       <div slot="footer" class="dialog-footer">
         <div class="dialog-footer-button-container">
@@ -198,8 +202,6 @@ export default {
 <style scoped>
 
 .dialog-container {
-  margin-top: 24px;
-  padding: 0 24px 24px;
 }
 
 .content-container {
@@ -242,8 +244,8 @@ textarea::-webkit-input-placeholder {
   overflow: hidden;
 }
 
-::v-deep .add-thinking-dialog .el-dialog__body {
-  padding-bottom: 0;
+:deep(.el-dialog__body) {
+  padding-bottom: 15px;
 }
 
 .upload-picture-button {
@@ -260,13 +262,14 @@ textarea::-webkit-input-placeholder {
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin-top: 10px;
 }
 
-.upload-picture-dialog {
+:deep(.upload-picture-dialog) {
   text-align: left;
 }
 
-::v-deep .upload-picture-dialog .el-dialog__title::after {
+:deep( .upload-picture-dialog .el-dialog__title::after) {
   background-color: rgb(5, 109, 232);
   height: 4px;
   width: 70px;

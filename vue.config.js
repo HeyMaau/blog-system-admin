@@ -9,7 +9,8 @@ module.exports = defineConfig({
                     'vue-router': 'VueRouter',
                     'axios': 'axios',
                     '@tinymce/tinymce-vue': 'Editor',
-                    'element-ui': 'ELEMENT'
+                    'element-plus': 'ElementPlus',
+                    '@element-plus/icons-vue': 'ElementPlusIconsVue'
                 },
                 function ({request}, callback) {
                     if (/^tinymce\/.+$/.test(request)) {
