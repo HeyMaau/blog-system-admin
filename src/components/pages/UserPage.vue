@@ -55,8 +55,12 @@
             prop="state"
             label="状态">
           <template #default="scope">
-            <i v-if="scope.row.state == 1" class="el-icon-success"></i>
-            <i v-else class="el-icon-error"></i>
+            <el-icon v-if="scope.row.state === '1'" :size="20" color="#32CD32">
+              <CircleCheckFilled/>
+            </el-icon>
+            <el-icon v-else :size="20" color="#DC143C">
+              <CircleCloseFilled/>
+            </el-icon>
           </template>
         </el-table-column>
         <el-table-column
@@ -134,7 +138,7 @@ import {Delete, Search, Setting} from "@element-plus/icons-vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 
 export default {
-  name: "UserList",
+  name: "UserPage",
   computed: {
     Search() {
       return Search

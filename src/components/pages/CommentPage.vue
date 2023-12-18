@@ -47,8 +47,12 @@
           prop="state"
           label="状态">
         <template #default="scope">
-          <i v-if="scope.row.state != 0" class="el-icon-success"></i>
-          <i v-else class="el-icon-error"></i>
+          <el-icon v-if="scope.row.state !== '0'" :size="20" color="#32CD32">
+            <CircleCheckFilled/>
+          </el-icon>
+          <el-icon v-else :size="20" color="#DC143C">
+            <CircleCloseFilled/>
+          </el-icon>
         </template>
       </el-table-column>
       <el-table-column
