@@ -1,15 +1,15 @@
 import {createRouter, createWebHashHistory, createWebHistory} from "vue-router";
 
-import MainPage from "@/components/MainPage";
+import MainPage from "@/components/MainPage.vue";
 import LoginPage from "@/components/pages/LoginPage.vue";
 import UserList from "@/components/pages/UserPage.vue";
 import CategoryPage from "@/components/pages/CategoryPage.vue";
-import ArticleCommentPage from "@/components/pages/ArticleCommentPage";
+import ArticleCommentPage from "@/components/pages/ArticleCommentPage.vue";
 import ArticlePage from "@/components/pages/ArticlePage.vue";
 import EditArticle from "@/components/pages/EditArticlePage.vue";
-import HomePage from "@/components/HomePage";
-import ThinkingPage from "@/components/pages/ThinkingPage";
-import ThinkingCommentPage from "@/components/pages/ThinkingCommentPage";
+import HomePage from "@/components/HomePage.vue";
+import ThinkingPage from "@/components/pages/ThinkingPage.vue";
+import ThinkingCommentPage from "@/components/pages/ThinkingCommentPage.vue";
 
 const routes = [
     {
@@ -28,7 +28,7 @@ const routes = [
 ]
 
 const router = createRouter({
-    history: process.env.NODE_ENV === 'production' ? createWebHistory() : createWebHashHistory(),
+    history: import.meta.env.PROD ? createWebHistory() : createWebHashHistory(),
     routes
 })
 

@@ -104,7 +104,7 @@ export default {
   methods: {
     getCaptcha() {
       this.captchaKey = Date.now()
-      this.captchaUrl = process.env.VUE_APP_SERVER_PATH + "/user/captcha?captcha_key=" + this.captchaKey
+      this.captchaUrl = import.meta.env.VITE_SERVER_PATH + "/user/captcha?captcha_key=" + this.captchaKey
     },
     async doLogin() {
       try {

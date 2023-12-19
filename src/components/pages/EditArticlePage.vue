@@ -71,7 +71,7 @@
                 v-model="inputValue"
                 ref="saveTagInput"
                 size="small"
-                @keyup.enter.native="handleInputConfirm"
+                @keyup.enter="handleInputConfirm"
                 @blur="handleInputConfirm"
             >
             </el-input>
@@ -247,7 +247,7 @@ export default {
     })
     this.observer.observe(this.$refs.pageContainerRef)
   },
-  beforeDestroy() {
+  beforeUnmount() {
     this.$refs.inputAreaRef.removeEventListener('input', this.adjustTextareaHeight)
     this.observer.disconnect()
   },

@@ -3,7 +3,7 @@ import router from "@/routers";
 import {ElMessage} from "element-plus";
 
 const request = axios.create({
-    baseURL: process.env.VUE_APP_SERVER_PATH + '/admin/thinking',
+    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/thinking',
     timeout: 5000,
     withCredentials: true,
 });

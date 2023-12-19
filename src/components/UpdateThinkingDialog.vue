@@ -17,8 +17,8 @@
                     ref="inputContentRef"/>
         </div>
       </div>
-      <div slot="footer" class="dialog-footer">
-        <div class="dialog-footer-button-container">
+      <template #footer>
+        <div class="dialog-footer-button-container dialog-footer">
           <el-icon :size="25" @click="openUploadPictureDialog">
             <Picture/>
           </el-icon>
@@ -26,7 +26,7 @@
             发布
           </el-button>
         </div>
-      </div>
+      </template>
     </el-dialog>
     <!--上传图片弹窗-->
     <el-dialog v-model="uploadPicDialogVisibility" title="上传图片" :close-on-click-modal="false"
@@ -46,12 +46,12 @@
           <Plus/>
         </el-icon>
       </el-upload>
-      <div slot="footer" class="dialog-footer">
-        <div class="dialog-footer-button-container">
+      <template #footer>
+        <div class="dialog-footer-button-container dialog-footer">
           <div>已插入{{ tempPictureList.length }}张图片</div>
           <el-button type="primary" @click="handleUploadPicture">保存图片</el-button>
         </div>
-      </div>
+      </template>
     </el-dialog>
   </div>
 </template>
@@ -127,17 +127,17 @@ export default {
       this.uploadPicDialogVisibility = true
       Object.assign(this.tempPictureList, this.pictureList)
     },
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     handlePictureUploadSuccess(response, file, fileList) {
       if (response.code === CODE_SUCCESS) {
         this.tempPictureList.push(response.data.image_id)
       }
     },
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     handlePictureUploadError(err, file, fileList) {
       this.$message.error("上传图片失败，请稍后重试")
     },
-    // eslint-disable-next-line no-unused-vars
+    // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     handlePictureRemove(file, fileList) {
       if (file.response !== undefined) {
         let index = this.tempPictureList.indexOf(file.response.data.image_id);

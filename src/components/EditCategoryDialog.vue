@@ -133,10 +133,12 @@ export default {
       <span class="cover-setting-title">标签颜色</span>
       <el-color-picker v-model="currentCategory.tagColor"></el-color-picker>
     </div>
-    <span slot="footer" class="dialog-footer">
+    <template #footer>
+      <span class="dialog-footer">
         <el-button @click="cancel">取 消</el-button>
         <el-button type="primary" @click="confirm">确 定</el-button>
       </span>
+    </template>
   </el-dialog>
 </template>
 

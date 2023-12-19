@@ -11,7 +11,7 @@
 </template>
 
 <script>
-import ThinkingList from "@/components/ThinkingList";
+import ThinkingList from "@/components/ThinkingList.vue";
 
 export default {
   name: "ThinkingPage",

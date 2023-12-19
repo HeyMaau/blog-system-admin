@@ -2,7 +2,7 @@
   <el-container>
     <el-header>
       <div class="header-container">
-        <img :src="`${publicPath}logo.png`" class="web-logo">
+        <img src="/logo.png" class="web-logo">
         <div class="header-title">
           管理后台
         </div>
@@ -22,15 +22,13 @@
 </template>
 
 <script>
-import AsideBar from "@/components/AsideBar";
+import AsideBar from "@/components/AsideBar.vue";
 
 export default {
   name: "MainPage",
   components: {AsideBar},
   data() {
-    return {
-      publicPath: process.env.BASE_URL
-    }
+    return {}
   },
   beforeRouteEnter(to, from, next) {
     let token = sessionStorage.getItem('token');

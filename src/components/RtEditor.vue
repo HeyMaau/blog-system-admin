@@ -91,13 +91,13 @@ export default {
       //初始化配置
       tinymceId: 'tinymce',
       myValue: this.value,
-      publicPath: process.env.BASE_URL,
+      publicPath: import.meta.env.BASE_URL,
       init: {
         selector: '#tinymce',
-        language_url: process.env.BASE_URL + 'tinymce/langs/zh_CN.js',//汉化路径是自定义的，一般放在public或static里面
+        language_url: import.meta.env.BASE_URL + 'tinymce/langs/zh_CN.js',//汉化路径是自定义的，一般放在public或static里面
         language: 'zh_CN',
-        skin_url: process.env.BASE_URL + 'tinymce/skins/ui/oxide',//皮肤
-        content_css: process.env.BASE_URL + 'tinymce/skins/content/default/content.css',//自己的static中路径
+        skin_url: import.meta.env.BASE_URL + 'tinymce/skins/ui/oxide',//皮肤
+        content_css: import.meta.env.BASE_URL + 'tinymce/skins/content/default/content.css',//自己的static中路径
         content_style: 'img {max-width:100%;}',//限制图片大小
         plugins: this.plugins,//插件
         //工具栏

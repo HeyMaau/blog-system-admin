@@ -84,7 +84,7 @@
         </el-pagination>
       </el-config-provider>
     </el-card>
-    <UpdateThinkingDialog v-show="updateThinkingDialogVisibility" :visibility.sync="updateThinkingDialogVisibility"
+    <UpdateThinkingDialog v-show="updateThinkingDialogVisibility" :visibility="updateThinkingDialogVisibility"
                           @onVisibilityChange="handleDialogVisibilityChange"
                           @onUpdateSuccess="getThinkingList"
                           :currentThinking="currentThinking"/>
@@ -95,7 +95,7 @@
 import {CODE_SUCCESS} from "@/utils/constants";
 import {deleteArticleApi, topArticleApi} from "@/apis/article_api";
 import {getThinkingListApi} from "@/apis/thinking_api";
-import UpdateThinkingDialog from "@/components/UpdateThinkingDialog";
+import UpdateThinkingDialog from "@/components/UpdateThinkingDialog.vue";
 import {Delete, Edit, Search} from "@element-plus/icons-vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
 

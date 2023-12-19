@@ -122,10 +122,12 @@
           </el-icon>
         </el-upload>
       </div>
-      <span slot="footer" class="dialog-footer">
-        <el-button @click="updateUserDialogVisible = false">取 消</el-button>
-        <el-button type="primary" @click="updateUser">确 定</el-button>
-      </span>
+      <template #footer>
+        <span class="dialog-footer">
+          <el-button @click="updateUserDialogVisible = false">取 消</el-button>
+          <el-button type="primary" @click="updateUser">确 定</el-button>
+        </span>
+      </template>
     </el-dialog>
   </div>
 </template>
