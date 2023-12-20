@@ -14,20 +14,6 @@
 // import axios from "axios";
 import tinymce from 'tinymce/tinymce' //tinymce默认hidden，不引入不显示
 import Editor from '@tinymce/tinymce-vue' //编辑器引入
-import 'tinymce/themes/silver/theme' //编辑器主题
-import 'tinymce/icons/default' //引入编辑器图标icon，不引入则不显示对应图标
-// 引入编辑器插件（基本免费插件都在这儿了）
-import 'tinymce/plugins/advlist' //高级列表
-import 'tinymce/plugins/autolink' //自动链接
-import 'tinymce/plugins/link' //超链接
-import 'tinymce/plugins/image' //插入编辑图片
-import 'tinymce/plugins/lists' //列表插件
-import 'tinymce/plugins/charmap' //特殊字符
-import 'tinymce/plugins/media' //插入编辑媒体
-import 'tinymce/plugins/wordcount' // 字数统计
-import 'tinymce/plugins/codesample' // 代码块
-import 'tinymce/plugins/table' // 表格
-import 'tinymce/plugins/autoresize' // 自适应尺寸
 import {uploadImageWithWatermark} from "@/apis/image_api";
 import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 
@@ -75,11 +61,6 @@ export default {
       type: Boolean,
       default: false
     },
-    //插件
-    plugins: {
-      type: [String, Array],
-      default: 'advlist autolink link image lists charmap media wordcount codesample table autoresize'
-    },
     triggerChange: {
       type: Boolean,
       default: false,
@@ -96,10 +77,27 @@ export default {
         selector: '#tinymce',
         language_url: import.meta.env.BASE_URL + 'tinymce/langs/zh_CN.js',//汉化路径是自定义的，一般放在public或static里面
         language: 'zh_CN',
+        theme_url: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/themes/silver/theme.min.js',
         skin_url: import.meta.env.BASE_URL + 'tinymce/skins/ui/oxide',//皮肤
-        content_css: import.meta.env.BASE_URL + 'tinymce/skins/content/default/content.css',//自己的static中路径
+        icons_url: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/icons/default/icons.min.js',
+        icons: 'default',
+        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/skins/content/default/content.min.css',//自己的static中路径
         content_style: 'img {max-width:100%;}',//限制图片大小
-        plugins: this.plugins,//插件
+        //插件
+        external_plugins: {
+          'advlist': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/advlist/plugin.min.js',
+          'autolink': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/autolink/plugin.min.js',
+          'link': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/link/plugin.min.js',
+          'image': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/image/plugin.min.js',
+          'lists': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/lists/plugin.min.js',
+          'charmap': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/charmap/plugin.min.js',
+          'media': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/media/plugin.min.js',
+          'wordcount': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/wordcount/plugin.min.js',
+          'codesample': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/codesample/plugin.min.js',
+          'table': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/table/plugin.min.js',
+          'autoresize': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/autoresize/plugin.min.js',
+          'emoticons': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/emoticons/plugin.min.js'
+        },
         //工具栏
         toolbar: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
           'styleselect | fontsizeselect | fontselect | forecolor backcolor | blockquote subscript superscript removeformat'],
