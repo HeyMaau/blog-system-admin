@@ -7,7 +7,7 @@ import CategoryPage from "@/components/pages/CategoryPage.vue";
 import ArticleCommentPage from "@/components/pages/ArticleCommentPage.vue";
 import ArticlePage from "@/components/pages/ArticlePage.vue";
 import EditArticle from "@/components/pages/EditArticlePage.vue";
-import HomePage from "@/components/HomePage.vue";
+import HomePage from "@/components/pages/HomePage.vue";
 import ThinkingPage from "@/components/pages/ThinkingPage.vue";
 import ThinkingCommentPage from "@/components/pages/ThinkingCommentPage.vue";
 
