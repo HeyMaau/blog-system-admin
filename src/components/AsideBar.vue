@@ -39,6 +39,15 @@
         <el-menu-item index="/thinking">想法列表</el-menu-item>
         <el-menu-item index="/thinking/comment">评论列表</el-menu-item>
       </el-sub-menu>
+      <el-sub-menu index="/media">
+        <template #title>
+          <el-icon>
+            <VideoPlay/>
+          </el-icon>
+          <span>媒体管理</span>
+        </template>
+        <el-menu-item index="/audio">音频列表</el-menu-item>
+      </el-sub-menu>
     </el-menu>
   </div>
 </template>
