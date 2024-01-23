@@ -21,6 +21,6 @@ export function updateAudioApi(audio: BlogAudio) {
     return postRequest.put('/update', audio)
 }
 
-export function deleteAudioApi(id: string) {
+export function deleteAudioApi(id: string | undefined | null) {
     return postRequest.delete('/delete/' + id)
 }

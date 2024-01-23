@@ -1,6 +1,6 @@
 <script setup lang="ts">
 
-import AudioList from "@/components/AudioList.vue";
+import AudioList from "../../components/AudioList.vue";
 </script>
 
 <template>

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
 import {Delete, Edit} from "@element-plus/icons-vue";
-import {deleteAudioApi, getAudioListApi} from "@/apis/audio_api.ts";
+import {deleteAudioApi, getAudioListApi} from "../apis/audio_api.ts";
 import {ref} from "vue";
-import {CODE_SUCCESS} from "@/utils/constants.js";
-import UpdateAudioDialog from "@/components/UpdateAudioDialog.vue";
-import {BlogAudio} from "@/pojo/BlogAudio.ts";
+import {CODE_SUCCESS} from "../utils/constants.js";
+import UpdateAudioDialog from "../components/UpdateAudioDialog.vue";
+import {BlogAudio} from "../pojo/BlogAudio.ts";
 import {ElMessage, ElMessageBox} from "element-plus";
 
 let page = 1
@@ -24,11 +24,15 @@ function getAudioList() {
 
 getAudioList()
 
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const currentAudio = ref<BlogAudio>({})
 const updateAudioDialogVisibility = ref(false)
 
 function addAudio() {
   updateAudioDialogVisibility.value = true
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   currentAudio.value = {}
 }
 
@@ -63,6 +67,8 @@ function onUpdateAudioDialogUpdate() {
 }
 
 function onUpdateAudioDialogClose() {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   currentAudio.value = {}
   updateAudioDialogVisibility.value = false
 }

@@ -1,11 +1,11 @@
 <script setup lang="ts">
 
 import {reactive, ref, watch} from "vue";
-import {BlogAudio} from "@/pojo/BlogAudio.ts";
+import {BlogAudio} from "../pojo/BlogAudio.ts";
 import {ElMessage, FormInstance, FormRules} from "element-plus";
-import {addAudioApi, updateAudioApi} from "@/apis/audio_api.ts";
-import {CODE_SUCCESS} from "@/utils/constants.js";
-import {deepClone} from "@/utils/clone-util.js";
+import {addAudioApi, updateAudioApi} from "../apis/audio_api.ts";
+import {CODE_SUCCESS} from "../utils/constants.js";
+import {deepClone} from "../utils/clone-util.js";
 
 const props = defineProps({
   visibility: Boolean,
@@ -48,8 +48,12 @@ const rules = reactive<FormRules<RuleForm>>({
 })
 
 const dialogTitle = ref('添加音频')
+// eslint-disable-next-line @typescript-eslint/ban-ts-comment
+// @ts-expect-error
 const audioData = ref<BlogAudio>({})
 watch(() => props.data, value => {
+  // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+  // @ts-expect-error
   audioData.value = deepClone(value)
   if (value!.id !== undefined && value!.id !== null) {
     dialogTitle.value = '修改音频'
@@ -68,6 +72,8 @@ function updateAudio(): void {
     }
   })
   if (audioData.value.id === undefined || audioData.value.id === null) {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     addAudioApi(audioData.value).then(response => {
       if (response.data.code === CODE_SUCCESS) {
         updateSuccess('添加音频成功')
@@ -76,6 +82,8 @@ function updateAudio(): void {
       }
     })
   } else {
+    // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+    // @ts-expect-error
     updateAudioApi(audioData.value).then(response => {
       if (response.data.code === CODE_SUCCESS) {
         updateSuccess('修改音频成功')
