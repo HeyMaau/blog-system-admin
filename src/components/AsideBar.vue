@@ -48,6 +48,12 @@
         </template>
         <el-menu-item index="/audio">音频列表</el-menu-item>
       </el-sub-menu>
+      <el-menu-item index="/friend_link">
+        <el-icon>
+          <Link/>
+        </el-icon>
+        <span>友情链接管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>

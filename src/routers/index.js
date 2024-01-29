@@ -11,6 +11,7 @@ import HomePage from "@/components/pages/HomePage.vue";
 import ThinkingPage from "@/components/pages/ThinkingPage.vue";
 import ThinkingCommentPage from "@/components/pages/ThinkingCommentPage.vue";
 import AudioPage from "@/components/pages/AudioPage.vue";
+import FriendLinkPage from "@/components/pages/FriendLinkPage.vue";
 
 const routes = [
     {
@@ -22,7 +23,8 @@ const routes = [
             {path: 'article', component: ArticlePage},
             {path: 'thinking', component: ThinkingPage},
             {path: 'thinking/comment', component: ThinkingCommentPage},
-            {path: 'audio', component: AudioPage}
+            {path: 'audio', component: AudioPage},
+            {path: 'friend_link', component: FriendLinkPage}
         ]
     },
     {path: '/login', component: LoginPage},
