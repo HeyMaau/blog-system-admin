@@ -77,26 +77,26 @@ export default {
         selector: '#tinymce',
         language_url: import.meta.env.BASE_URL + 'tinymce/langs/zh_CN.js',//汉化路径是自定义的，一般放在public或static里面
         language: 'zh_CN',
-        theme_url: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/themes/silver/theme.min.js',
+        theme_url: 'https://cdn.staticfile.net/tinymce/5.10.7/themes/silver/theme.min.js',
         skin_url: import.meta.env.BASE_URL + 'tinymce/skins/ui/oxide',//皮肤
-        icons_url: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/icons/default/icons.min.js',
+        icons_url: 'https://cdn.staticfile.net/tinymce/5.10.7/icons/default/icons.min.js',
         icons: 'default',
-        content_css: 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/skins/content/default/content.min.css',//自己的static中路径
+        content_css: 'https://cdn.staticfile.net/tinymce/5.10.7/skins/content/default/content.min.css',//自己的static中路径
         content_style: 'img {max-width:100%;}',//限制图片大小
         //插件
         external_plugins: {
-          'advlist': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/advlist/plugin.min.js',
-          'autolink': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/autolink/plugin.min.js',
-          'link': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/link/plugin.min.js',
-          'image': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/image/plugin.min.js',
-          'lists': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/lists/plugin.min.js',
-          'charmap': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/charmap/plugin.min.js',
-          'media': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/media/plugin.min.js',
-          'wordcount': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/wordcount/plugin.min.js',
-          'codesample': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/codesample/plugin.min.js',
-          'table': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/table/plugin.min.js',
-          'autoresize': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/autoresize/plugin.min.js',
-          'emoticons': 'https://cdn.jsdelivr.net/npm/tinymce@5.10.7/plugins/emoticons/plugin.min.js'
+          'advlist': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/advlist/plugin.min.js',
+          'autolink': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/autolink/plugin.min.js',
+          'link': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/link/plugin.min.js',
+          'image': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/image/plugin.min.js',
+          'lists': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/lists/plugin.min.js',
+          'charmap': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/charmap/plugin.min.js',
+          'media': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/media/plugin.min.js',
+          'wordcount': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/wordcount/plugin.min.js',
+          'codesample': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/codesample/plugin.min.js',
+          'table': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/table/plugin.min.js',
+          'autoresize': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/autoresize/plugin.min.js',
+          'emoticons': 'https://cdn.staticfile.net/tinymce/5.10.7/plugins/emoticons/plugin.min.js'
         },
         //工具栏
         toolbar: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
