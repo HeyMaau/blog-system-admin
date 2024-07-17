@@ -136,7 +136,9 @@ export default {
           {text: 'Java', value: 'java'},
           {text: 'C', value: 'c'},
           {text: 'C#', value: 'csharp'},
-          {text: 'C++', value: 'cpp'}
+          {text: 'C++', value: 'cpp'},
+          {text: 'Kotlin', value: 'kotlin'},
+          {text: 'Groovy', value: 'groovy'}
         ]
       }
     }
