@@ -30,7 +30,7 @@
           <el-col :span="8">
             <el-upload
                 :headers="{'authorization': token}"
-                accept=".jpg,.jpeg,.png"
+                accept=".jpg,.jpeg,.png,.webp"
                 class="avatar-uploader"
                 :action="uploadImagePath"
                 :show-file-list="false"
@@ -161,8 +161,9 @@ export default {
       const isJPEG = file.type === 'image/jpeg';
       const isJPG = file.type === 'image/jpg';
       const isPNG = file.type === 'image/png';
+      const isWEBP = file.type === 'image/webp';
       const isLt2M = file.size / 1024 / 1024 < 2;
-      const isTypeCorrect = isJPEG || isJPG || isPNG
+      const isTypeCorrect = isJPEG || isJPG || isPNG || isWEBP
       if (!isTypeCorrect) {
         this.$message.error('上传图片只能是 JPG/PNG 格式!');
       }
