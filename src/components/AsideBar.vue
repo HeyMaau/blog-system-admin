@@ -54,14 +54,20 @@
         </el-icon>
         <span>友情链接管理</span>
       </el-menu-item>
+      <el-menu-item index="/app">
+        <el-icon>
+          <SwitchFilled/>
+        </el-icon>
+        <span>APP版本管理</span>
+      </el-menu-item>
     </el-menu>
   </div>
 </template>
 
-<script>
-export default {
-  name: "AsideBar",
-}
+<script setup lang="ts">
+import {ChatLineSquare, Memo, PieChart, SwitchFilled, User, VideoPlay} from "@element-plus/icons-vue";
+
+
 </script>
 
 <style scoped>
