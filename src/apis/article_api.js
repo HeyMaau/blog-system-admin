@@ -3,7 +3,7 @@ import router from "@/routers";
 import {ElMessage} from "element-plus";
 
 const request = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/article/',
+    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/article',
     timeout: 5000,
     withCredentials: true,
 });
@@ -24,7 +24,7 @@ request.interceptors.response.use(function (response) {
 });
 
 export function getArticles(page, size, keywords, category, state) {
-    return request.get('list', {
+    return request.get('/list', {
         params: {
             page,
             size,
@@ -36,11 +36,11 @@ export function getArticles(page, size, keywords, category, state) {
 }
 
 export function deleteArticleApi(id) {
-    return request.delete('state/' + id)
+    return request.delete('/state/' + id)
 }
 
 export function topArticleApi(id) {
-    return request.put(`top/${id}`)
+    return request.put(`/top/${id}`)
 }
 
 export function addArticleApi(article) {

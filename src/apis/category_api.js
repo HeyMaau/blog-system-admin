@@ -3,7 +3,7 @@ import router from "@/routers";
 import {ElMessage} from "element-plus";
 
 const request = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/category/',
+    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/category',
     timeout: 5000,
     withCredentials: true,
 });
@@ -24,7 +24,7 @@ request.interceptors.response.use(function (response) {
 });
 
 export function getCategoriesApi(page, size) {
-    return request.get('list', {
+    return request.get('/list', {
         params: {
             page,
             size

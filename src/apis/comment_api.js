@@ -3,7 +3,7 @@ import router from "@/routers";
 import {ElMessage} from "element-plus";
 
 const request = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/comment/',
+    baseURL: import.meta.env.VITE_SERVER_PATH + '/admin/comment',
     timeout: 5000,
     withCredentials: true,
 });
@@ -24,7 +24,7 @@ request.interceptors.response.use(function (response) {
 });
 
 export function getCommentsApi(page, size, state, type) {
-    return request.get('list', {
+    return request.get('/list', {
         params: {
             page,
             size,
@@ -35,13 +35,13 @@ export function getCommentsApi(page, size, state, type) {
 }
 
 export function deleteCommentByState(id) {
-    return request.delete('state/' + id)
+    return request.delete('/state/' + id)
 }
 
 export function recoverComment(id) {
-    return request.put('recover/' + id)
+    return request.put('/recover/' + id)
 }
 
 export function topComment(id) {
-    return request.put('top/' + id)
+    return request.put('/top/' + id)
 }

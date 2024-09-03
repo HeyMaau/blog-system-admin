@@ -3,7 +3,7 @@ import router from "@/routers";
 import {ElMessage} from "element-plus";
 
 const request = axios.create({
-    baseURL: import.meta.env.VITE_SERVER_PATH + "/image/",
+    baseURL: import.meta.env.VITE_SERVER_PATH + "/image",
     timeout: 5000,
     withCredentials: true,
 });
@@ -24,5 +24,5 @@ request.interceptors.response.use(function (response) {
 });
 
 export function uploadImageWithWatermark(data) {
-    return request.post('watermark', data)
+    return request.post('/watermark', data)
 }
