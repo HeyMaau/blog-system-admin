@@ -65,7 +65,7 @@
             label="操作">
           <template #default="scope">
             <el-button v-if="scope.row.state !== '0'" type="danger" :icon="Delete" size="small"
-                       @click="deleteArticle(scope.row.id)"></el-button>
+                       @click="deleteThinking(scope.row.id)"></el-button>
             <el-button v-if="scope.row.state !== '0'" type="info" :icon="Edit" size="small"
                        @click="updateThinking(scope.row)"></el-button>
           </template>
@@ -93,8 +93,8 @@
 
 <script>
 import {CODE_SUCCESS} from "@/utils/constants";
-import {deleteArticleApi, topArticleApi} from "@/apis/article_api";
-import {getThinkingListApi} from "@/apis/thinking_api";
+import {topArticleApi} from "@/apis/article_api";
+import {deleteThinkingApi, getThinkingListApi} from "@/apis/thinking_api";
 import UpdateThinkingDialog from "@/components/UpdateThinkingDialog.vue";
 import {Delete, Edit, Search} from "@element-plus/icons-vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
@@ -152,19 +152,19 @@ export default {
       this.currentPage = page
       this.getThinkingList()
     },
-    deleteArticle(articleID) {
-      this.$confirm('此操作将删除该文章, 是否继续?', '提示', {
+    deleteThinking(thinkingID) {
+      this.$confirm('此操作将删除该想法, 是否继续?', '提示', {
         confirmButtonText: '确定',
         cancelButtonText: '取消',
         type: 'warning'
       }).then(async () => {
-        const {data: response} = await deleteArticleApi(articleID)
+        const {data: response} = await deleteThinkingApi(thinkingID)
         if (response.code === CODE_SUCCESS) {
           this.$message({
             type: 'success',
-            message: '删除文章成功!'
+            message: '删除想法成功!'
           });
-          // this.getArticleList()
+          await this.getThinkingList()
         } else {
           this.$message({
             type: 'error',

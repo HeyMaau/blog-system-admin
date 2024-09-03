@@ -43,3 +43,7 @@ export function addThinkingApi(thinking) {
 export function updateThinkingApi(thinking) {
     return request.put('', thinking)
 }
+
+export function deleteThinkingApi(id) {
+    return request.delete(`/delete/${id}`)
+}

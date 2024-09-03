@@ -94,14 +94,9 @@ export default {
       this.pictureFileList = []
       this.pictureList = []
       this.tempPictureList = []
-      if (newValue.images !== undefined && newValue.images.length !== 0) {
+      if (newValue.images !== undefined && newValue.images !== null && newValue.images.length !== 0) {
         this.pictureList = newValue.images.split('-')
-        this.pictureList.forEach(value => {
-          this.pictureFileList.push({
-            name: value,
-            url: this.pictureBaseUrl + value
-          })
-        })
+        this.initPictureFileList()
       }
     },
     thinking: {
@@ -151,6 +146,8 @@ export default {
       this.uploadPicDialogVisibility = false
       this.confirmUpload = true
       this.pictureList = this.tempPictureList
+      this.pictureFileList = []
+      this.initPictureFileList()
       this.thinking.images = this.pictureList.join('-')
     },
     beforePictureUpload(file) {
@@ -194,6 +191,14 @@ export default {
       } else {
         this.$message.error(isUpdate ? '修改想法失败，请稍后再试' : '发布想法失败，请稍后再试')
       }
+    },
+    initPictureFileList() {
+      this.pictureList.forEach(value => {
+        this.pictureFileList.push({
+          name: value,
+          url: this.pictureBaseUrl + value
+        })
+      })
     }
   }
 }
