@@ -19,7 +19,7 @@ export default {
         cover: '',
         tagColor: '#3ddc84'
       },
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       uploadCoverUrl: URL_IMAGE,
       coverUrl: '',
       rules: {

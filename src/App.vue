@@ -4,10 +4,14 @@
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+import {getCookie, setCookie} from "./utils/cookie-util.ts";
+import {COOKIE_KEY_HAS_CLOSED_BROWSER} from "./utils/constants.js";
 
-export default {
-  name: 'App',
+let hasClosedBrowserFlag = getCookie(COOKIE_KEY_HAS_CLOSED_BROWSER);
+if (hasClosedBrowserFlag == null) {
+  localStorage.removeItem('token')
+  setCookie(`${COOKIE_KEY_HAS_CLOSED_BROWSER}=false`)
 }
 </script>
 

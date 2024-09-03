@@ -6,7 +6,7 @@ import {BlogApp} from "../pojo/BlogApp.ts";
 const request = getAxiosInstance('/admin/app')
 
 request.interceptors.request.use(config => {
-    config.headers['authorization'] = sessionStorage.getItem('token')
+    config.headers['authorization'] = localStorage.getItem('token')
     return config
 })
 

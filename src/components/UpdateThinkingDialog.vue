@@ -70,7 +70,7 @@ export default {
   data() {
     return {
       uploadPictureUrl: URL_IMAGE + 'watermark',
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       editDialogVisibility: false,
       uploadPicDialogVisibility: false,
       pictureList: [],

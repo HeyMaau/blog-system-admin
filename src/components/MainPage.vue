@@ -31,7 +31,7 @@ export default {
     return {}
   },
   beforeRouteEnter(to, from, next) {
-    let token = sessionStorage.getItem('token');
+    let token = localStorage.getItem('token');
     if (token === undefined || token === null) {
       next(vm => {
         vm.$router.push('/login')

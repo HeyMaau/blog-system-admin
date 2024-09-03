@@ -119,7 +119,7 @@ export default {
       inputValue: '',
       categoryList: [],
       uploadImagePath: URL_IMAGE,
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       observer: null
     }
   },

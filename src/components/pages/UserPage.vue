@@ -177,7 +177,7 @@ export default {
         sign: '',
         avatar: ''
       },
-      token: sessionStorage.getItem('token'),
+      token: localStorage.getItem('token'),
       updateUserDialogVisible: false,
       rules: {
         userName: [
