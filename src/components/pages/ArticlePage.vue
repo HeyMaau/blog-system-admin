@@ -40,7 +40,10 @@
             min-width="16%"
             label="标题">
           <template #default="scope">
-            <router-link :to="{ name: 'editArticle', params: { id: scope.row.id }}">{{ scope.row.title }}</router-link>
+            <router-link target="_blank" :to="{ name: 'editArticle', params: { id: scope.row.id }}">{{
+                scope.row.title
+              }}
+            </router-link>
           </template>
         </el-table-column>
         <el-table-column

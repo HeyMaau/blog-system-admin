@@ -95,7 +95,7 @@ import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
-  name: "EditArticle",
+  name: "EditArticlePage",
   components: {
     RtEditor
   },
