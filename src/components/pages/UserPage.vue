@@ -134,7 +134,7 @@
 
 <script>
 import {deleteUser, getUsers, updateUserApi} from "@/apis/user_api";
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 import {Delete, Search, Setting} from "@element-plus/icons-vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
@@ -193,7 +193,7 @@ export default {
           {required: true, message: '请输入个性签名', trigger: 'blur'}
         ]
       },
-      uploadAvatarUrl: URL_IMAGE,
+      uploadAvatarUrl: URL_UPLOAD_IMAGE,
       avatarUrl: ''
     }
   },

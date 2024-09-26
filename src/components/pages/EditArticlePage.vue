@@ -91,7 +91,7 @@
 <script>
 import RtEditor from "@/components/RtEditor.vue";
 import {getCategoriesApi} from "@/apis/category_api";
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
@@ -118,7 +118,7 @@ export default {
       inputVisible: false,
       inputValue: '',
       categoryList: [],
-      uploadImagePath: URL_IMAGE,
+      uploadImagePath: URL_UPLOAD_IMAGE,
       token: localStorage.getItem('token'),
       observer: null
     }

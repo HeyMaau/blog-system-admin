@@ -1,6 +1,6 @@
 <script>
 
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {addCategory, updateCategory} from "@/apis/category_api";
 
 export default {
@@ -20,7 +20,7 @@ export default {
         tagColor: '#3ddc84'
       },
       token: localStorage.getItem('token'),
-      uploadCoverUrl: URL_IMAGE,
+      uploadCoverUrl: URL_UPLOAD_IMAGE,
       coverUrl: '',
       rules: {
         name: [
