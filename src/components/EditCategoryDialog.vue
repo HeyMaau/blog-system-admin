@@ -1,6 +1,6 @@
 <script>
 
-import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {addCategory, updateCategory} from "@/apis/category_api";
 
 export default {
@@ -21,7 +21,6 @@ export default {
       },
       token: localStorage.getItem('token'),
       uploadCoverUrl: URL_UPLOAD_IMAGE,
-      coverUrl: '',
       rules: {
         name: [
           {required: true, message: '请输入分类名称', trigger: 'blur'}
@@ -33,10 +32,9 @@ export default {
     }
   },
   methods: {
-    handleUploadCoverSuccess(res, file) {
-      this.coverUrl = URL.createObjectURL(file.raw);
+    handleUploadCoverSuccess(res) {
       this.$message.success('上传封面成功')
-      this.currentCategory.cover = res.data.image_id
+      this.currentCategory.cover = res.data.image_url
     },
     beforeCoverUpload(file) {
       const isJPG = file.type === 'image/jpeg' || file.type === 'image/jpg' || file.type === 'image/png';
@@ -87,7 +85,6 @@ export default {
     category: {
       handler(newValue) {
         this.currentCategory = newValue
-        this.coverUrl = this.currentCategory.cover.trim().length === 0 ? '' : URL_IMAGE + this.currentCategory.cover
         if (this.currentCategory.tagColor === null || this.currentCategory.tagColor.length === 0) {
           this.currentCategory.tagColor = '#3ddc84'
         }
@@ -123,7 +120,7 @@ export default {
           :on-success="handleUploadCoverSuccess"
           :on-error="handleUploadCoverError"
           :before-upload="beforeCoverUpload">
-        <img v-if="coverUrl" :src="coverUrl" class="avatar">
+        <img v-if="category.cover" :src="category.cover" class="avatar">
         <el-icon v-else class="el-icon-plus avatar-uploader-icon">
           <Plus/>
         </el-icon>
