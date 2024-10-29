@@ -116,7 +116,7 @@
             :on-success="handleUploadAvatarSuccess"
             :on-error="handleUploadAvatarError"
             :before-upload="beforeAvatarUpload">
-          <img v-if="avatarUrl" :src="avatarUrl" class="avatar">
+          <img v-if="user.avatar" :src="user.avatar" class="avatar">
           <el-icon v-else class="el-icon-plus avatar-uploader-icon">
             <Plus/>
           </el-icon>
@@ -134,7 +134,7 @@
 
 <script>
 import {deleteUser, getUsers, updateUserApi} from "@/apis/user_api";
-import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 import {Delete, Search, Setting} from "@element-plus/icons-vue";
 import zhCn from "element-plus/es/locale/lang/zh-cn";
@@ -193,8 +193,7 @@ export default {
           {required: true, message: '请输入个性签名', trigger: 'blur'}
         ]
       },
-      uploadAvatarUrl: URL_UPLOAD_IMAGE,
-      avatarUrl: ''
+      uploadAvatarUrl: URL_UPLOAD_IMAGE
     }
   },
   methods: {
@@ -239,10 +238,9 @@ export default {
         });
       });
     },
-    handleUploadAvatarSuccess(res, file) {
-      this.avatarUrl = URL.createObjectURL(file.raw);
+    handleUploadAvatarSuccess(res) {
       this.$message.success('上传头像成功')
-      this.user.avatar = res.data.image_id
+      this.user.avatar = res.data.image_url
     },
     handleUploadAvatarError() {
       this.$message.error('上传头像失败')
@@ -262,12 +260,6 @@ export default {
     showUpdateUserDialog(user) {
       this.updateUserDialogVisible = true
       this.user = deepClone(user)
-      if (this.user.avatar !== undefined && this.user.avatar.length !== 0) {
-        this.setUserAvatar(this.user.avatar)
-      }
-    },
-    setUserAvatar(avatarID) {
-      this.avatarUrl = URL_IMAGE + avatarID
     },
     async updateUser() {
       const {data: response} = await updateUserApi(this.user)
