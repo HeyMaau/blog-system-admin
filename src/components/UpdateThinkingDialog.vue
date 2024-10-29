@@ -7,7 +7,7 @@
       <div class="content-container">
         <div class="picture-area" v-show="pictureList.length !== 0">
           <div class="thinking-picture-container" v-for="item in pictureList" :key="item">
-            <img :src="`${pictureBaseUrl}${item}`" class="thinking-picture"/>
+            <img :src="item" class="thinking-picture"/>
           </div>
         </div>
         <div class="input-area">
@@ -78,8 +78,7 @@ export default {
       pictureFileList: [],
       confirmUpload: false,
       thinking: {},
-      addButtonAble: false,
-      pictureBaseUrl: URL_IMAGE
+      addButtonAble: false
     }
   },
   watch: {
@@ -125,7 +124,7 @@ export default {
     // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     handlePictureUploadSuccess(response, file, fileList) {
       if (response.code === CODE_SUCCESS) {
-        this.tempPictureList.push(response.data.image_id)
+        this.tempPictureList.push(response.data.image_url)
       }
     },
     // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
@@ -135,7 +134,7 @@ export default {
     // eslint-disable-next-line no-unused-vars,@typescript-eslint/no-unused-vars
     handlePictureRemove(file, fileList) {
       if (file.response !== undefined) {
-        let index = this.tempPictureList.indexOf(file.response.data.image_id);
+        let index = this.tempPictureList.indexOf(file.response.data.image_url);
         this.tempPictureList.splice(index, 1)
       } else {
         let index = this.tempPictureList.indexOf(file.name);
@@ -154,10 +153,11 @@ export default {
       const isJPEG = file.type === 'image/jpeg';
       const isJPG = file.type === 'image/jpg';
       const isPNG = file.type === 'image/png';
+      const isWEBP = file.type === 'image/png';
       const isLt6M = file.size / 1024 / 1024 < 6;
-      const isTypeCorrect = isJPEG || isJPG || isPNG
+      const isTypeCorrect = isJPEG || isJPG || isPNG || isWEBP
       if (!isTypeCorrect) {
-        this.$message.error('上传图片只能是JPG/PNG格式!');
+        this.$message.error('上传图片只能是JPG/PNG/WEBP格式!');
       }
       if (!isLt6M) {
         this.$message.error('上传图片大小不能超过6MB!');
@@ -196,7 +196,7 @@ export default {
       this.pictureList.forEach(value => {
         this.pictureFileList.push({
           name: value,
-          url: this.pictureBaseUrl + value
+          url: value
         })
       })
     }
