@@ -15,7 +15,7 @@
 import tinymce from 'tinymce/tinymce' //tinymce默认hidden，不引入不显示
 import Editor from '@tinymce/tinymce-vue' //编辑器引入
 import {uploadImageWithWatermark} from "@/apis/image_api";
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS} from "@/utils/constants";
 
 const fonts = [
   "宋体=宋体",
@@ -111,15 +111,15 @@ export default {
         toolbar_sticky: true,
         //图片上传
         images_upload_handler: async (blobInfo, success, failure) => {
-          if (blobInfo.blob().size / 1024 / 1024 > 2) {
-            failure("上传失败，图片大小请控制在 2M 以内")
+          if (blobInfo.blob().size / 1024 / 1024 > 6) {
+            failure("上传失败，图片大小请控制在 6M 以内")
           } else {
             let formData = new FormData()
             // 服务端接收文件的参数名，文件数据，文件名
             formData.append('file', blobInfo.blob(), blobInfo.filename())
             const {data: response} = await uploadImageWithWatermark(formData)
             if (response.code === CODE_SUCCESS) {
-              const imageUrl = URL_IMAGE + response.data.image_id
+              const imageUrl = response.data.image_url
               success(imageUrl)
             } else {
               failure(response.message)

@@ -36,7 +36,7 @@
                 :show-file-list="false"
                 :on-success="handleCoverSuccess"
                 :before-upload="beforeCoverUpload">
-              <img v-if="imageUrl" :src="imageUrl" class="avatar">
+              <img v-if="article.cover" :src="article.cover" class="avatar">
               <i v-else class="el-icon-plus avatar-uploader-icon"> 添加文章封面</i>
             </el-upload>
           </el-col>
@@ -91,7 +91,7 @@
 <script>
 import RtEditor from "@/components/RtEditor.vue";
 import {getCategoriesApi} from "@/apis/category_api";
-import {CODE_SUCCESS, URL_IMAGE, URL_UPLOAD_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {addArticleApi, getArticleApi, updateArticleApi} from "@/apis/article_api";
 
 export default {
@@ -113,7 +113,6 @@ export default {
         type: '0',
       },
       articleState: '',
-      imageUrl: '',
       dynamicTags: [],
       inputVisible: false,
       inputValue: '',
@@ -138,10 +137,6 @@ export default {
       const {data: response} = await getArticleApi(articleID)
       if (response.code === CODE_SUCCESS) {
         this.article = response.data
-        if (response.data.cover.length !== 0) {
-          this.imageUrl = URL_IMAGE + response.data.cover
-          this.oldImageID = response.data.cover
-        }
         this.dynamicTags = response.data.labels.split('-')
         this.articleState = response.data.state
       } else {
@@ -152,10 +147,8 @@ export default {
       this.$refs.inputAreaRef.style.height = 'inherit'
       this.$refs.inputAreaRef.style.height = ev.target.scrollHeight + 'px'
     },
-    handleCoverSuccess(res, file) {
-      this.imageUrl = URL.createObjectURL(file.raw);
-      this.article.cover = res.data.image_id
-      this.oldImageID = res.data.image_id
+    handleCoverSuccess(res) {
+      this.article.cover = res.data.image_url
     },
     beforeCoverUpload(file) {
       const isJPEG = file.type === 'image/jpeg';
