@@ -57,7 +57,7 @@
 </template>
 
 <script>
-import {CODE_SUCCESS, URL_IMAGE} from "@/utils/constants";
+import {CODE_SUCCESS, URL_UPLOAD_IMAGE} from "@/utils/constants";
 import {deepClone} from "@/utils/clone-util";
 import {addThinkingApi, updateThinkingApi} from "@/apis/thinking_api";
 
@@ -69,7 +69,7 @@ export default {
   },
   data() {
     return {
-      uploadPictureUrl: URL_IMAGE + 'watermark',
+      uploadPictureUrl: URL_UPLOAD_IMAGE + '/watermark',
       token: localStorage.getItem('token'),
       editDialogVisibility: false,
       uploadPicDialogVisibility: false,
