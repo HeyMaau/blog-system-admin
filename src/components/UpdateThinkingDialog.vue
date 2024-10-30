@@ -38,6 +38,7 @@
           :headers="{Authorization: token}"
           list-type="picture-card"
           :file-list="pictureFileList"
+          :multiple="true"
           :before-upload="beforePictureUpload"
           :on-success="handlePictureUploadSuccess"
           :on-error="handlePictureUploadError"
