@@ -77,26 +77,26 @@ export default {
         selector: '#tinymce',
         language_url: import.meta.env.BASE_URL + 'tinymce/langs/zh_CN.js',//汉化路径是自定义的，一般放在public或static里面
         language: 'zh_CN',
-        theme_url: 'https://cdn.staticfile.net/tinymce/5.10.9/themes/silver/theme.min.js',
+        theme_url: 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/themes/silver/theme.min.js',
         skin_url: import.meta.env.BASE_URL + 'tinymce/skins/ui/oxide',//皮肤
-        icons_url: 'https://cdn.staticfile.net/tinymce/5.10.9/icons/default/icons.min.js',
+        icons_url: 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/icons/default/icons.min.js',
         icons: 'default',
-        content_css: 'https://cdn.staticfile.net/tinymce/5.10.9/skins/content/default/content.min.css',//自己的static中路径
+        content_css: 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/skins/content/default/content.min.css',//自己的static中路径
         content_style: 'img {max-width:100%;}',//限制图片大小
         //插件
         external_plugins: {
-          'advlist': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/advlist/plugin.min.js',
-          'autolink': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/autolink/plugin.min.js',
-          'link': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/link/plugin.min.js',
-          'image': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/image/plugin.min.js',
-          'lists': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/lists/plugin.min.js',
-          'charmap': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/charmap/plugin.min.js',
-          'media': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/media/plugin.min.js',
-          'wordcount': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/wordcount/plugin.min.js',
-          'codesample': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/codesample/plugin.min.js',
-          'table': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/table/plugin.min.js',
-          'autoresize': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/autoresize/plugin.min.js',
-          'emoticons': 'https://cdn.staticfile.net/tinymce/5.10.9/plugins/emoticons/plugin.min.js'
+          'advlist': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/advlist/plugin.min.js',
+          'autolink': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/autolink/plugin.min.js',
+          'link': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/link/plugin.min.js',
+          'image': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/image/plugin.min.js',
+          'lists': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/lists/plugin.min.js',
+          'charmap': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/charmap/plugin.min.js',
+          'media': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/media/plugin.min.js',
+          'wordcount': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/wordcount/plugin.min.js',
+          'codesample': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/codesample/plugin.min.js',
+          'table': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/table/plugin.min.js',
+          'autoresize': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/autoresize/plugin.min.js',
+          'emoticons': 'https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/tinymce/5.10.9/plugins/emoticons/plugin.min.js'
         },
         //工具栏
         toolbar: ['undo redo | formatselect | bold italic underline strikethrough link | alignleft aligncenter alignright alignjustify | lineheight bullist numlist outdent indent table | codesample image media',
