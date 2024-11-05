@@ -155,13 +155,13 @@ export default {
       const isJPG = file.type === 'image/jpg';
       const isPNG = file.type === 'image/png';
       const isWEBP = file.type === 'image/webp';
-      const isLt2M = file.size / 1024 / 1024 < 2;
+      const isLt2M = file.size / 1024 / 1024 < 6;
       const isTypeCorrect = isJPEG || isJPG || isPNG || isWEBP
       if (!isTypeCorrect) {
         this.$message.error('上传图片只能是 JPG/PNG 格式!');
       }
       if (!isLt2M) {
-        this.$message.error('上传图片大小不能超过 5MB!');
+        this.$message.error('上传图片大小不能超过 6MB!');
       }
       return isTypeCorrect && isLt2M;
     },
