@@ -15,6 +15,7 @@
     "axios": "^1.6.8",
     "element-plus": "^2.4.4",
     "tinymce": "^5.10.9",
+    "vditor": "^3.11.0",
     "vue": "^3.4.38",
     "vue-router": "^4.3.3"
   },
