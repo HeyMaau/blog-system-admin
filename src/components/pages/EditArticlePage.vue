@@ -5,7 +5,7 @@
     </label>
     <div class="editor-save-button-container">
       <RtEditor v-model="article.content" v-show="false"/>
-      <MdEditor class="md-editor"/>
+      <MdEditor class="md-editor" v-if="true"/>
       <div class="save-button-container" ref="saveButtonContainerRef">
         <div class="save-button" @click="saveArticle">
           <svg ref="refreshIconRef" t="1686294507516" class="icon refresh-icon" viewBox="0 0 1024 1024" version="1.1"
@@ -251,14 +251,6 @@ export default {
   flex-direction: column;
 }
 
-.md-editor {
-  width: 1000px !important;
-}
-
-.tinymce-editor {
-  width: 1000px;
-}
-
 #input-container {
   width: 1000px;
   margin: 16px 0;
@@ -362,6 +354,7 @@ export default {
 
 .editor-save-button-container {
   position: relative;
+  width: 1000px;
 }
 
 .save-button-container {
