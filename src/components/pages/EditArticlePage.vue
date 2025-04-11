@@ -1,11 +1,22 @@
 <template>
   <div id="container" ref="pageContainerRef">
+    <div class="switch-editor-mode-container">
+      <span>
+        编辑器模式：
+      </span>
+      <div class="switch-editor-mode-radio-group">
+        <el-radio-group v-model="editorMode">
+          <el-radio value="1" border>MarkDown</el-radio>
+          <el-radio value="2" border>富文本</el-radio>
+        </el-radio-group>
+      </div>
+    </div>
     <label id="input-container">
       <textarea id="input-area" placeholder="请输入标题" rows="1" ref="inputAreaRef" v-model="article.title"></textarea>
     </label>
     <div class="editor-save-button-container">
-      <RtEditor v-model="article.content" v-show="false"/>
-      <MdEditor class="md-editor" v-if="true"/>
+      <RtEditor v-model="article.content" v-if="editorMode === '2'"/>
+      <MdEditor class="md-editor" v-else/>
       <div class="save-button-container" ref="saveButtonContainerRef">
         <div class="save-button" @click="saveArticle">
           <svg ref="refreshIconRef" t="1686294507516" class="icon refresh-icon" viewBox="0 0 1024 1024" version="1.1"
@@ -105,7 +116,8 @@ export default {
       categoryList: [],
       uploadImagePath: URL_UPLOAD_IMAGE,
       token: localStorage.getItem('token'),
-      observer: null
+      observer: null,
+      editorMode: '1'
     }
   },
   methods: {
@@ -249,6 +261,22 @@ export default {
   display: flex;
   align-items: center;
   flex-direction: column;
+}
+
+.switch-editor-mode-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  width: 1000px;
+  color: #444444;
+  font-size: 17px;
+  font-weight: 500;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+
+.switch-editor-mode-radio-group {
+  margin-left: 20px;
 }
 
 #input-container {
