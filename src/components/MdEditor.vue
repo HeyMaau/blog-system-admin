@@ -9,12 +9,21 @@ import 'vditor/dist/index.css';
 
 const vditor = ref<Vditor | null>(null);
 
+// eslint-disable-next-line no-undef
+const model = defineModel<string>()
+
 onMounted(() => {
   vditor.value = new Vditor('vditor', {
     minHeight: 500,
     placeholder: "请随便写吧",
     counter: {
       enable: true
+    },
+    cache: {
+      enable: false
+    },
+    input(value: string) {
+      model.value = value;
     }
   });
 });

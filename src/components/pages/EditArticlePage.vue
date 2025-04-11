@@ -16,7 +16,7 @@
     </label>
     <div class="editor-save-button-container">
       <RtEditor v-model="article.content" v-if="editorMode === '2'"/>
-      <MdEditor class="md-editor" v-else/>
+      <MdEditor v-model="article.content" class="md-editor" v-else/>
       <div class="save-button-container" ref="saveButtonContainerRef">
         <div class="save-button" @click="saveArticle">
           <svg ref="refreshIconRef" t="1686294507516" class="icon refresh-icon" viewBox="0 0 1024 1024" version="1.1"
