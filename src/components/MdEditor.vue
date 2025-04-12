@@ -6,6 +6,9 @@
 import {ref, onMounted} from 'vue';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
+import {BlogImage} from "@/pojo/BlogImage.ts";
+import {CODE_SUCCESS} from "@/utils/constants";
+import {ElMessage} from "element-plus";
 
 const vditor = ref<Vditor | null>(null);
 
@@ -24,6 +27,36 @@ onMounted(() => {
     },
     input(value: string) {
       model.value = value;
+    },
+    upload: {
+      url: import.meta.env.VITE_SERVER_PATH + '/image',
+      accept: 'image/*',
+      multiple: false,
+      max: 2 * 1024 * 1024,
+      fieldName: 'file',
+      headers: {
+        'Authorization': localStorage.getItem('token')
+      },
+      format(files: File[], responseText: string): string {
+        let response: BlogImage = JSON.parse(responseText);
+        let fileName = files[0].name;
+        if (response.success && response.code === CODE_SUCCESS) {
+          ElMessage.success('上传图片成功')
+          return JSON.stringify({
+            "msg": "",
+            "code": 0,
+            "data": {
+              "errFiles": [],
+              "succMap": {
+                [fileName]: response.data.image_url
+              }
+            }
+          })
+        } else {
+          ElMessage.error('上传图片失败')
+          return ''
+        }
+      }
     }
   });
 });
