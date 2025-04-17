@@ -3,7 +3,7 @@
 </template>
 
 <script setup lang="ts">
-import {ref, onMounted} from 'vue';
+import {ref, onMounted, watch} from 'vue';
 import Vditor from 'vditor';
 import 'vditor/dist/index.css';
 import {BlogImage} from "@/pojo/BlogImage.ts";
@@ -60,6 +60,10 @@ onMounted(() => {
     }
   });
 });
+
+watch(model, value => {
+  vditor.value?.setValue(value);
+})
 
 </script>
 

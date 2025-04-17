@@ -5,9 +5,9 @@
         编辑器模式：
       </span>
       <div class="switch-editor-mode-radio-group">
-        <el-radio-group v-model="editorMode">
+        <el-radio-group v-model="article.type">
           <el-radio value="1" border>MarkDown</el-radio>
-          <el-radio value="2" border>富文本</el-radio>
+          <el-radio value="0" border>富文本</el-radio>
         </el-radio-group>
       </div>
     </div>
@@ -15,7 +15,7 @@
       <textarea id="input-area" placeholder="请输入标题" rows="1" ref="inputAreaRef" v-model="article.title"></textarea>
     </label>
     <div class="editor-save-button-container">
-      <RtEditor v-model="article.content" v-if="editorMode === '2'"/>
+      <RtEditor v-model="article.content" v-if="article.type === '0'"/>
       <MdEditor v-model="article.content" class="md-editor" v-else/>
       <div class="save-button-container" ref="saveButtonContainerRef">
         <div class="save-button" @click="saveArticle">
@@ -107,7 +107,7 @@ export default {
         state: '',
         summary: '',
         title: '',
-        type: '0',
+        type: '1',
       },
       articleState: '',
       dynamicTags: [],
@@ -116,8 +116,7 @@ export default {
       categoryList: [],
       uploadImagePath: URL_UPLOAD_IMAGE,
       token: localStorage.getItem('token'),
-      observer: null,
-      editorMode: '1'
+      observer: null
     }
   },
   methods: {

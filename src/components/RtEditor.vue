@@ -145,8 +145,11 @@ export default {
   },
   watch: {
     //监听内容变化
-    modelValue(newValue) {
-      this.myValue = (newValue == null ? '' : newValue)
+    modelValue: {
+      immediate: true,
+      handler: function (newValue) {
+        this.myValue = (newValue == null ? '' : newValue)
+      }
     },
     myValue(newValue) {
       if (this.triggerChange) {
