@@ -39,7 +39,8 @@ export default defineConfig(({mode}) => {
                             '@tinymce/tinymce-vue': 'Editor',
                             'tinymce/tinymce': 'tinymce',
                             'element-plus': 'ElementPlus',
-                            '@element-plus/icons-vue': 'ElementPlusIconsVue'
+                            '@element-plus/icons-vue': 'ElementPlusIconsVue',
+                            'vditor': 'Vditor'
                         })
                     ]
                 },

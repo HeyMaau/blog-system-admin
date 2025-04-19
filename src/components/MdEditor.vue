@@ -5,9 +5,8 @@
 <script setup lang="ts">
 import {onMounted, ref, watch} from 'vue';
 import Vditor from 'vditor';
-import 'vditor/dist/index.css';
-import {BlogImage} from "@/pojo/BlogImage.ts";
-import {CODE_SUCCESS} from "@/utils/constants";
+import {BlogImage} from "../pojo/BlogImage.ts";
+import {CODE_SUCCESS} from "../utils/constants";
 import {ElMessage} from "element-plus";
 
 const vditor = ref<Vditor | null>(null);
@@ -27,7 +26,9 @@ onMounted(() => {
     },
     after() {
       watch(model, value => {
-        vditor?.value?.setValue(value)
+        if (value != null) {
+          vditor?.value?.setValue(value)
+        }
       }, {
         immediate: true
       })
@@ -36,13 +37,13 @@ onMounted(() => {
       model.value = value;
     },
     upload: {
-      url: import.meta.env.VITE_SERVER_PATH + '/image',
+      url: import.meta.env.VITE_SERVER_PATH + '/image/watermark',
       accept: 'image/*',
       multiple: false,
       max: 2 * 1024 * 1024,
       fieldName: 'file',
       headers: {
-        'Authorization': localStorage.getItem('token')
+        'Authorization': localStorage.getItem('token') || ''
       },
       format(files: File[], responseText: string): string {
         let response: BlogImage = JSON.parse(responseText);

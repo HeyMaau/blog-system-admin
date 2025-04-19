@@ -6,8 +6,8 @@
       </span>
       <div class="switch-editor-mode-radio-group">
         <el-radio-group v-model="article.type">
-          <el-radio value="1" border>MarkDown</el-radio>
-          <el-radio value="0" border>富文本</el-radio>
+          <el-radio label="1" border>MarkDown</el-radio>
+          <el-radio label="0" border>富文本</el-radio>
         </el-radio-group>
       </div>
     </div>
