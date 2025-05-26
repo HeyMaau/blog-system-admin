@@ -24,6 +24,9 @@ onMounted(() => {
     cache: {
       enable: false
     },
+    toolbarConfig: {
+      pin: true
+    },
     after() {
       watch(model, value => {
         if (value != null) {
